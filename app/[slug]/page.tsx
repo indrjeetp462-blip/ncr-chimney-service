@@ -1,68 +1,53 @@
-import { notFound } from "next/navigation";
 import CallPopup from "./CallPopup";
 
-const brands = ["faber", "glen", "hafele", "kaff", "siemens"];
-const areas = [
-  { slug: "jaypee-greens-greater-noida", name: "Jaypee Greens Greater Noida" },
-  { slug: "sector-150-noida", name: "Sector 150 Noida" },
-  { slug: "jaypee-wishtown-sector-128-noida", name: "Jaypee Wishtown Sector 128 Noida" },
-  { slug: "indirapuram-ghaziabad", name: "Indirapuram Ghaziabad" },
-  { slug: "vaishali-sector-5-ghaziabad", name: "Vaishali Sector 5 Ghaziabad" },
-  { slug: "raj-nagar-ghaziabad", name: "Raj Nagar Ghaziabad" },
-];
-
-export function generateStaticParams() {
-  const params = [];
-  for (const b of brands) {
-    for (const a of areas) {
-      params.push({ slug: `${b}-chimney-service-${a.slug}` });
-    }
-  }
-  return params;
-}
+const areas: any = {
+  "jaypee-greens-greater-noida": "Jaypee Greens Greater Noida",
+  "sector-150-noida": "Sector 150 Noida",
+  "indirapuram-ghaziabad": "Indirapuram Ghaziabad",
+  "vaishali-sector-5-ghaziabad": "Vaishali Ghaziabad",
+  "jaypee-greens": "Jaypee Greens",
+  "vaishali": "Vaishali",
+  "sector-150": "Sector 150"
+};
 
 export default function Page({ params }: { params: { slug: string } }) {
-  const { slug } = params;
-  const parts = slug.split("-chimney-service-");
+  const slug = params.slug;
+  let brand = "Faber";
+  let areaKey = slug;
 
-  let brand = "faber";
-  let areaSlug = slug;
-
-  if (parts.length === 2) {
-    brand = parts[0];
-    areaSlug = parts[1];
+  if (slug.includes("-chimney-service-")) {
+    const p = slug.split("-chimney-service-");
+    brand = p[0].charAt(0).toUpperCase() + p[0].slice(1);
+    areaKey = p[1];
   }
 
-  const areaObj = areas.find((a) => a.slug === areaSlug) || areas.find((a) => slug.includes(a.slug)) || areas[0];
-  if (!brands.includes(brand)) {
-    brand = "faber";
-  }
-
-  const brandName = brand.charAt(0).toUpperCase() + brand.slice(1);
+  const areaName = areas[areaKey] || areaKey.replace(/-/g, ' ').replace(/\b\w/g, (l:any) => l.toUpperCase());
   const PHONE = "8796284796";
 
   return (
-    <div className="bg-white text-gray-900">
-      <header className="bg-black text-white p-4 flex justify-between items-center sticky top-0 z-40">
-        <div className="font-black text-lg">NCR CHIMNEY SERVICE</div>
-        <a href={`tel:${PHONE}`} className="bg-yellow-400 text-black px-5 py-2 rounded-full font-bold">Call {PHONE}</a>
-      </header>
+    <div style={{fontFamily:'sans-serif'}}>
+      <div style={{background:'black', color:'white', padding:'15px 20px', display:'flex', justifyContent:'space-between', alignItems:'center'}}>
+        <b>NCR CHIMNEY SERVICE</b>
+        <a href={`tel:${PHONE}`} style={{background:'#facc15', color:'black', padding:'8px 16px', borderRadius:'20px', textDecoration:'none', fontWeight:'bold'}}>{PHONE}</a>
+      </div>
 
-      <section className="bg-gray-100 p-6 md:p-16">
-        <h1 className="text-3xl md:text-5xl font-extrabold leading-tight">
-          {brandName} Chimney Service in {areaObj.name}
-        </h1>
-        <p className="mt-4 text-lg text-gray-700 max-w-2xl">
-          Same day {brandName} chimney repair, cleaning & service in {areaObj.name}. Expert technician within 60 mins. Genuine spare parts + 90 days warranty.
-        </p>
-        <div className="mt-8 flex flex-wrap gap-4">
-          <a href={`tel:${PHONE}`} className="bg-green-600 text-white px-8 py-4 rounded-full font-bold text-lg">CALL NOW</a>
-          <a href={`https://wa.me/91${PHONE}`} className="bg-white border-2 border-green-600 text-green-600 px-8 py-4 rounded-full font-bold">WhatsApp</a>
+      <div style={{background:'#f3f4f6', padding:'40px 20px', textAlign:'center'}}>
+        <h1 style={{fontSize:'36px', fontWeight:'900', lineHeight:'1.1'}}>{brand} Chimney Service in {areaName}</h1>
+        <p style={{marginTop:'15px', color:'#4b5563', maxWidth:'600px', margin:'15px auto'}}>Same Day Service in {areaName} - Repair, Cleaning, Installation. 60 Mins me Technician. 90 Days Warranty.</p>
+        <div style={{marginTop:'25px'}}>
+          <a href={`tel:${PHONE}`} style={{background:'#16a34a', color:'white', padding:'14px 28px', borderRadius:'30px', textDecoration:'none', fontWeight:'bold', marginRight:'10px'}}>CALL NOW</a>
+          <a href={`https://wa.me/91${PHONE}`} style={{background:'white', border:'2px solid #16a34a', color:'#16a34a', padding:'14px 28px', borderRadius:'30px', textDecoration:'none', fontWeight:'bold'}}>WhatsApp</a>
         </div>
-        <p className="mt-4 text-sm">⭐ 4.8/5 Rated | 10,000+ Customers | Available 8AM-9PM</p>
-      </section>
-      <div className="p-6 text-center"><a href="/">Go Home</a></div>
+        <p style={{marginTop:'15px', fontSize:'13px'}}>⭐ 4.8/5 | 10,000+ Happy Customers</p>
+      </div>
+
+      <div style={{padding:'20px', textAlign:'center'}}>
+        <h3>Services in {areaName}</h3>
+        <p>✔️ Chimney Cleaning ✔️ Motor Repair ✔️ Filter Change ✔️ Installation</p>
+        <br/><br/>
+        <a href="/">← Back to Home</a>
+      </div>
       <CallPopup />
     </div>
-  );
+  )
 }
