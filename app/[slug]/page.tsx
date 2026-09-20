@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import CallPopup from "./CallPopup";
+import CallPopup from "./Callpopup";
 
 const brands = ["faber", "glen", "hafele", "kaff", "siemens"];
 const areas = [
