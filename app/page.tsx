@@ -116,13 +116,42 @@ export default function Home(){
    </div>
   </div>
 
-  {/* SEO BIG */}
-  <div style={{padding:16, background:'#f9f9f9'}}>
-   <h2 style={{fontSize:12, fontWeight:800}}>Noida & Ghaziabad Chimney Service Center - {phone}</h2>
-   <div style={{fontSize:10, color:'#999', lineHeight:1.7, textAlign:'justify', border:'1px solid #eee', padding:12, borderRadius:8, marginTop:8, height:200, overflowY:'auto'}}>
-    Faber chimney service Noida Ghaziabad 8796284796 Faber repair cleaning installation Faber service center Noida Sector 62 18 15 50 150 137 76 78 Indirapuram Vaishali Kaushambi Crossing Republik Raj Nagar Vasundhara Govindpuram Shastri Nagar Kavi Nagar Loni Shalimar Garden Modinagar Elica chimney service Noida Ghaziabad Elica repair cleaning Hindware chimney service Kaff Glen Sunflame Prestige Pigeon Inalsa Kutchina Blowhot Bosch Siemens Hafele chimney service Noida Ghaziabad only chimney service near me chimney cleaning near me chimney repair near me kitchen chimney service best chimney service Noida Ghaziabad same day 45 min arrival 30 day warranty verified 10k customers 4.6 star 335 reviews NCR chimney service Gaur City Gaur Chowk Noida City Centre Greater Noida Extension chimney deep cleaning basic cleaning check up installation uninstallation motor PCB blower repair suction problem noise problem auto clean not working filter cleaning duct cleaning oil collector carbon filter baffle mesh filter touch control motion sensor LED light push button repair chimney service contact {phone} whatsapp {phone} book online doorstep service all brands.
-   </div>
+  {/* FOOTER - 30 LINKS */}
+<footer style={{background:'#f3f4f6', padding:'40px 20px', fontSize:12, color:'#6b7280', marginTop:20}}>
+  <p style={{fontWeight:'bold', marginBottom:16, fontSize:14, color:'black'}}>Our Service Areas (30 Locations):</p>
+  <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:8}}>
+    <a href="/faber-chimney-service-jaypee-greens-greater-noida">Faber Jaypee Greens</a>
+    <a href="/faber-chimney-service-sector-150-noida">Faber Sector 150</a>
+    <a href="/faber-chimney-service-jaypee-wishtown-sector-128-noida">Faber Wishtown 128</a>
+    <a href="/faber-chimney-service-indirapuram-ghaziabad">Faber Indirapuram</a>
+    <a href="/faber-chimney-service-vaishali-sector-5-ghaziabad">Faber Vaishali Sec 5</a>
+    <a href="/faber-chimney-service-raj-nagar-ghaziabad">Faber Raj Nagar</a>
+    <a href="/glen-chimney-service-jaypee-greens-greater-noida">Glen Jaypee Greens</a>
+    <a href="/glen-chimney-service-sector-150-noida">Glen Sector 150</a>
+    <a href="/glen-chimney-service-jaypee-wishtown-sector-128-noida">Glen Wishtown 128</a>
+    <a href="/glen-chimney-service-indirapuram-ghaziabad">Glen Indirapuram</a>
+    <a href="/glen-chimney-service-vaishali-sector-5-ghaziabad">Glen Vaishali Sec 5</a>
+    <a href="/glen-chimney-service-raj-nagar-ghaziabad">Glen Raj Nagar</a>
+    <a href="/hafele-chimney-service-jaypee-greens-greater-noida">Hafele Jaypee Greens</a>
+    <a href="/hafele-chimney-service-sector-150-noida">Hafele Sector 150</a>
+    <a href="/hafele-chimney-service-jaypee-wishtown-sector-128-noida">Hafele Wishtown 128</a>
+    <a href="/hafele-chimney-service-indirapuram-ghaziabad">Hafele Indirapuram</a>
+    <a href="/hafele-chimney-service-vaishali-sector-5-ghaziabad">Hafele Vaishali Sec 5</a>
+    <a href="/hafele-chimney-service-raj-nagar-ghaziabad">Hafele Raj Nagar</a>
+    <a href="/kaff-chimney-service-jaypee-greens-greater-noida">Kaff Jaypee Greens</a>
+    <a href="/kaff-chimney-service-sector-150-noida">Kaff Sector 150</a>
+    <a href="/kaff-chimney-service-jaypee-wishtown-sector-128-noida">Kaff Wishtown 128</a>
+    <a href="/kaff-chimney-service-indirapuram-ghaziabad">Kaff Indirapuram</a>
+    <a href="/kaff-chimney-service-vaishali-sector-5-ghaziabad">Kaff Vaishali Sec 5</a>
+    <a href="/kaff-chimney-service-raj-nagar-ghaziabad">Kaff Raj Nagar</a>
+    <a href="/siemens-chimney-service-jaypee-greens-greater-noida">Siemens Jaypee Greens</a>
+    <a href="/siemens-chimney-service-sector-150-noida">Siemens Sector 150</a>
+    <a href="/siemens-chimney-service-jaypee-wishtown-sector-128-noida">Siemens Wishtown 128</a>
+    <a href="/siemens-chimney-service-indirapuram-ghaziabad">Siemens Indirapuram</a>
+    <a href="/siemens-chimney-service-vaishali-sector-5-ghaziabad">Siemens Vaishali Sec 5</a>
+    <a href="/siemens-chimney-service-raj-nagar-ghaziabad">Siemens Raj Nagar</a>
   </div>
+</footer>
 
   <div style={{textAlign:'center', fontSize:10, color:'#bbb', padding:'20px 0 100px'}}>© NCR Chimney Service • {phone} • Noida & Ghaziabad ONLY • All Brands • 10k+ Happy Customers</div>
 
