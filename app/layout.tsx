@@ -2,8 +2,8 @@ import "./globals.css";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Chimney repair Service center in Noida & Ghaziabad | Repair, Cleaning - NCR Chimney Service",
-  description: "Best Chimney Service in Noida, Ghaziabad & Delhi NCR. Expert kitchen chimney repair, service & cleaning. Same day service. Call NCR Chimney Service now.",
+  title: "Chimney Service Center in Noida Ghaziabad - Not Working Repair @Home",
+  description: "Best Chimney Service Center in Noida, Ghaziabad & Delhi NCR. Chimney Not Working? Same Day Repair, Cleaning & Service at Home. Call 8796284796",
 };
 
 export default function RootLayout({
@@ -14,12 +14,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <meta name="google-site-verification" content="KUpOaI7VAFzvOndO3ySn_SzMurazhYs4YpTJLOlh8RA" />
+        <meta name="google-site-verification" content="KUp0a17WAFzvOnD3ySn_SzMuzrazhYs4YpTJLOIhN8A" />
       </head>
-    <body>
-      {children}
-      <a href="tel:+918796284796" style={{position:'fixed', bottom:'20px', right:'20px', background:'#16a34a', color:'white', padding:'14px 22px', borderRadius:'50px', fontWeight:'bold', zIndex:9999, textDecoration:'none'}}>📞 Call Now</a>
-    </body>    
+      <body>
+        {children}
+      </body>
     </html>
   );
 }
