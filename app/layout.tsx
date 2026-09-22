@@ -2,8 +2,8 @@ import "./globals.css";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Chimney Service or repair near me in Noida Ghaziabad - Not Working Repair @Home",
-  description: "Best Chimney Service or repair near me  in Noida, Ghaziabad & Delhi NCR. Chimney Not Working? Same Day Repair, Cleaning & Service at Home. Call 8796284796",
+  title: "Chimney repair or service near me in Noida Ghaziabad - Not Working Repair @Home",
+  description: "Best Chimney repair or service near me  in Noida, Ghaziabad & Delhi NCR. Chimney Not Working? Same Day Repair, Cleaning & Service at Home. Call 8796284796",
 };
 
 export default function RootLayout({
