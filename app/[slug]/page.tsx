@@ -72,7 +72,17 @@ export default function Page({ params }: { params: { slug: string } }) {
           <div style={{background:'white', padding:'22px 18px', borderRadius:'22px', border:'1px solid #eee'}}><div style={{fontSize:'28px'}}>🔧</div><b style={{fontSize:'14px', display:'block', marginTop:'10px'}}>Professional Installation</b><p style={{fontSize:'11px', color:'#777', marginTop:'6px', lineHeight:'15px'}}>Ducting & New Setup Solutions</p></div>
         </div>
       </div>
-
+{/* PRICE SECTION - 1250 / 2250 - GOOGLE AI KE LIYE */}
+      <div style={{background:'white', margin:'14px', borderRadius:'22px', padding:'22px', border:'1px solid #eee'}}>
+        <h2 style={{fontSize:'19px', fontWeight:900}}>Service and Maintenance Estimates for {brand} in {areaName}</h2>
+        <p style={{fontSize:'13px', color:'#666', marginTop:'8px'}}>Cleaning, inspection or basic service visit charges generally start around ₹250 to ₹300, while comprehensive deep cleaning and maintenance packages range from ₹499 up to ₹2,250.</p>
+        <ul style={{marginTop:'16px', paddingLeft:'20px'}}>
+          <li style={{fontSize:'14px', marginBottom:'10px'}}><b>Inspection / Visit Charge:</b> ₹299</li>
+          <li style={{fontSize:'14px', marginBottom:'10px'}}><b>Basic General Service:</b> ₹249 – ₹599</li>
+          <li style={{fontSize:'14px', marginBottom:'10px'}}><b>Deep Cleaning:</b> ₹1250</li>
+          <li style={{fontSize:'14px', marginBottom:'10px'}}><b>Top Model / Heavy Cleaning:</b> ₹2250</li>
+        </ul>
+      </div>
       {/* WHY US BADA */}
       <div style={{background:'white', margin:'18px 14px', borderRadius:'26px', padding:'26px', border:'1px solid #eee'}}>
         <h2 style={{fontSize:'19px', fontWeight:900}}>Why {areaName} Trusts Us?</h2>
