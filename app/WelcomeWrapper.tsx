@@ -26,15 +26,24 @@ export default function WelcomeWrapper({ children }: { children: React.ReactNode
         textAlign: 'center',
         fontFamily: 'system-ui, sans-serif'
       }}>
+        {/* White Chimney Icon */}
+        <div style={{ marginBottom: '18px' }}>
+          <svg width="80" height="80" viewBox="0 0 24 24" fill="white">
+            <path d="M7 10h10a1 1 0 0 1 1 1v1H6v-1a1 1 0 0 1 1-1z" />
+            <path d="M8 12h8v7H8z" />
+            <path d="M10 2.5c0.3 0.8 1.5 1 1.5 2 0 0.8-1.5 1-1.5 2s1.5 1.2 1.5 2-1.5 1-1.5 2" stroke="white" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
+          </svg>
+        </div>
+
         <h1 style={{ color: 'white', fontSize: '36px', fontWeight: '900', margin: 0, lineHeight: '1.2' }}>
           Welcome to<br/>Chimney Care
         </h1>
-        <p style={{ color: 'white', fontSize: '18px', marginTop: '12px', fontWeight: '500' }}>
+        <p style={{ color: 'white', fontSize: '18px', marginTop: '10px', fontWeight: '500' }}>
           Chimney Service or Repair
         </p>
 
         <div style={{
-          marginTop: '24px',
+          marginTop: '22px',
           background: 'white',
           padding: '8px 18px',
           borderRadius: '20px',
