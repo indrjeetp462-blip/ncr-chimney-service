@@ -2,8 +2,11 @@ import "./globals.css";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Chimney repair or service near me in Noida Ghaziabad - Not Working Repair @Home",
-  description: "Best Chimney repair or service near me  in Noida, Ghaziabad & Delhi NCR. Chimney Not Working? Same Day Repair, Cleaning & Service at Home. Call 8796284796",
+  title: "Chimney Service Repair - Near Me in Noida Ghaziabad Delhi",
+  description: "Best Chimney repair or service near me in Noida, Ghaziabad & Delhi NCR. Same Day Service.",
+  manifest: "/manifest.json",
+  themeColor: "#ff6600",
+  applicationName: "Chimney Service Repair",
 };
 
 export default function RootLayout({
@@ -14,7 +17,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <meta name="google-site-verification" content="KUp0a17WAFzvOnD3ySn_SzMuzrazhYs4YpTJLOIhN8A" />
+        <meta name="google-site-verification" content="NJQu0aTW7FoVoD3yDn_EdMucxehYaYpT6LICHMBA" />
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#ff6600" />
+        <link rel="apple-touch-icon" href="/favicon.ico" />
       </head>
       <body>
         {children}
