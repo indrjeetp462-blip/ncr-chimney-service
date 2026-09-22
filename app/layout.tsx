@@ -1,9 +1,10 @@
 import "./globals.css";
 import type { Metadata } from "next";
+import InstallBanner from "./InstallBanner";
 
 export const metadata: Metadata = {
   title: "Chimney Service Repair - Near Me in Noida Ghaziabad Delhi",
-  description: "Best Chimney repair or service near me in Noida, Ghaziabad & Delhi NCR. Same Day Service.",
+  description: "Best Chimney repair or service near me in Noida, Ghaziabad & Delhi NCR, Same Day Service.",
   manifest: "/manifest.json",
   themeColor: "#ff6600",
   applicationName: "Chimney Service Repair",
@@ -17,12 +18,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <meta name="google-site-verification" content="NJQu0aTW7FoVoD3yDn_EdMucxehYaYpT6LICHMBA" />
+        <meta name="google-site-verification" content="NJQuOa7WFoVoDy3Dn_EdMucxeHYaTp6L6ICIMBA" />
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#ff6600" />
         <link rel="apple-touch-icon" href="/favicon.ico" />
       </head>
       <body>
+        <InstallBanner />
         {children}
       </body>
     </html>
