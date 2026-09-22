@@ -4,6 +4,8 @@ import { useState, useEffect } from "react"
 export default function Home(){
  const [tab, setTab] = useState("Service")
  const [pop, setPop] = useState(false)
+  const [showForm, setShowForm] = useState(false)
+  const [selectedService, setSelectedService] = useState("") 
  useEffect(()=>{ setTimeout(()=>setPop(true), 4000) }, [])
  const phone = "8796284796"
 
@@ -59,7 +61,7 @@ export default function Home(){
       <div style={{fontWeight:800, fontSize:17}}>{s.name}</div>
       <div style={{fontSize:12, color:'#666', marginTop:4}}>★ {s.rating} • {s.time} • Noida & Gzb Only</div>
       <ul style={{margin:'10px 0 0', paddingLeft:16, color:'#444', fontSize:13, lineHeight:1.6}}>{s.points.map((p:string,j:number)=><li key={j}>{p}</li>)}</ul>
-      <a href={`tel:${phone}`} style={{display:'inline-block', marginTop:14, background:'#111', color:'#fff', padding:'10px 24px', borderRadius:8, textDecoration:'none', fontWeight:800}}>Book Now</a>
+      <button onClick={()=>{setSelectedService(s.name); setShowForm(true)}} style={{display:'inline-block', marginTop:14, background:'#111', color:'#fff', padding:'10px 20px', borderRadius:8, border:'none', fontWeight:800}}>Book Now</button>
      </div>
     </div>
    ))}
@@ -168,7 +170,22 @@ export default function Home(){
     </div>
    </div>
   )}
-
+{showForm && (
+<div style={{position:'fixed', inset:0, zIndex:100000, background:'rgba(0,0,0,0.6)', display:'flex', alignItems:'center', justifyContent:'center', padding:16}}>
+<div style={{background:'#fff', width:'100%', maxWidth:400, borderRadius:16, padding:20}}>
+<div style={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
+<h3 style={{margin:0}}>Book {selectedService}</h3>
+<button onClick={()=>setShowForm(false)} style={{border:'none', background:'#eee', borderRadius:20, width:30, height:30, fontWeight:900}}>X</button>
+</div>
+<div style={{marginTop:16, display:'flex', flexDirection:'column', gap:12}}>
+<input placeholder="Your Name" style={{padding:12, borderRadius:8, border:'1px solid #ddd'}} />
+<input placeholder="Mobile Number" style={{padding:12, borderRadius:8, border:'1px solid #ddd'}} />
+<input value={selectedService} readOnly style={{padding:12, borderRadius:8, border:'1px solid #ddd', background:'#f5f5f5'}} />
+<a href={`https://wa.me/91${phone}?text=Hi, I want to book ${selectedService}`} style={{background:'#ff6600', color:'#fff', padding:12, borderRadius:8, textAlign:'center', textDecoration:'none', fontWeight:800}}>Submit on WhatsApp</a>
+</div>
+</div>
+</div>
+)}
   <div style={{position:'fixed', bottom:0, left:0, right:0, background:'#fff', borderTop:'1px solid #ddd', padding:10, display:'flex', gap:10, maxWidth:800, margin:'0 auto', zIndex:30}}>
    <a href={`tel:${phone}`} style={{flex:1, background:'#000', color:'#fff', textAlign:'center', padding:14, borderRadius:10, textDecoration:'none', fontWeight:900}}>Call: {phone}</a>
    <a href={`https://wa.me/91${phone}`} style={{flex:1, background:'#25D366', color:'#fff', textAlign:'center', padding:14, borderRadius:10, textDecoration:'none', fontWeight:900}}>WhatsApp</a>
