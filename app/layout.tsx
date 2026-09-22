@@ -1,7 +1,5 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import InstallBanner from "./InstallBanner";
-import WelcomeWrapper from "./WelcomeWrapper";
 
 export const metadata: Metadata = {
   title: "Chimney Service Repair - Near Me in Noida Ghaziabad Delhi",
@@ -19,16 +17,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <meta name="google-site-verification" content="NJQuOa7WoVoDy3Dm_EdMucxelYaTp6L6ICIMBA" />
+        <meta name="google-site-verification" content="NJQuOa7WoVoDy3Dm_EdMucxe1YaTp6L6ICIMBA" />
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#ff6600" />
         <link rel="apple-touch-icon" href="/favicon.ico" />
       </head>
       <body>
-        <WelcomeWrapper>
-          <InstallBanner />
-          {children}
-        </WelcomeWrapper>
+        {children}
       </body>
     </html>
   );
