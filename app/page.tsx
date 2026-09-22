@@ -157,19 +157,7 @@ export default function Home(){
 
   <div style={{textAlign:'center', fontSize:10, color:'#bbb', padding:'20px 0 100px'}}>© NCR Chimney Service • {phone} • Noida & Ghaziabad ONLY • All Brands • 10k+ Happy Customers</div>
 
-  {pop && (
-   <div style={{position:'fixed', inset:0, background:'rgba(0,0,0,0.65)', display:'flex', alignItems:'center', justifyContent:'center', padding:20, zIndex:99}} onClick={()=>setPop(false)}>
-    <div style={{background:'#fff', borderRadius:20, padding:22, width:'100%', maxWidth:360, textAlign:'center'}} onClick={e=>e.stopPropagation()}>
-     <div style={{fontSize:40}}>📞</div>
-     <div style={{fontWeight:900, fontSize:20, marginTop:8}}>Chimney Service Need?</div>
-     <div style={{color:'#666', fontSize:13, marginTop:6}}>Noida & Ghaziabad Only • 45 Min Me Technician Ayega</div>
-     <div style={{background:'#fffbe6', border:'1px dashed #eab308', borderRadius:8, padding:8, marginTop:12, fontSize:11}}>Faber • Elica • Hindware • Kaff • Glen • All Brands • {phone}</div>
-     <a href={`tel:${phone}`} style={{display:'block', background:'#000', color:'#fff', textAlign:'center', padding:16, borderRadius:12, marginTop:16, textDecoration:'none', fontWeight:900, fontSize:16}}>Call Now: {phone}</a>
-     <a href={`https://wa.me/91${phone}?text=Hi, Chimney Service chahiye`} style={{display:'block', background:'#25D366', color:'#fff', textAlign:'center', padding:14, borderRadius:12, marginTop:8, textDecoration:'none', fontWeight:800}}>WhatsApp Now</a>
-     <div onClick={()=>setPop(false)} style={{marginTop:10, fontSize:12, color:'#999', cursor:'pointer'}}>Close ✕</div>
-    </div>
-   </div>
-  )}
+ 
 {showForm && (
 <div style={{position:'fixed', inset:0, zIndex:100000, background:'rgba(0,0,0,0.6)', display:'flex', alignItems:'center', justifyContent:'center', padding:16}}>
 <div style={{background:'#fff', width:'100%', maxWidth:400, borderRadius:16, padding:20}}>
