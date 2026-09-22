@@ -1,12 +1,12 @@
 "use client"
-import { useState, useEffect } from "react"
+import { useState } from "react"
 
 export default function Home(){
  const [tab, setTab] = useState("Service")
- const [pop, setPop] = useState(false)
+ 
   const [showForm, setShowForm] = useState(false)
   const [selectedService, setSelectedService] = useState("") 
- useEffect(()=>{ setTimeout(()=>setPop(true), 4000) }, [])
+ 
  const phone = "8796284796"
 
  const data:any = {
