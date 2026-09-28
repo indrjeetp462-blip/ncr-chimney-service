@@ -1,107 +1,156 @@
-"use client"
-import { useState, useEffect } from "react"
+"use client";
+import { useState, useEffect } from "react";
+import { notFound } from "next/navigation";
 
-const areas: any = {
-  "jaypee-greens-greater-noida": "Jaypee Greens Greater Noida",
-  "sector-150-noida": "Sector 150 Noida",
-  "indirapuram-ghaziabad": "Indirapuram Ghaziabad",
-  "vaishali-sector-5-ghaziabad": "Vaishali Ghaziabad",
-  "vaishali": "Vaishali",
-  "sector-150": "Sector 150",
-  "jaypee-greens": "Jaypee Greens",
-};
+// Typewriter Effect
+function TypeWriter({ text, speed = 40 }: { text: string; speed?: number }) {
+  const [display, setDisplay] = useState("");
+  useEffect(() => {
+    setDisplay("");
+    let i = 0;
+    const timer = setInterval(() => {
+      if (i < text.length) {
+        setDisplay(text.slice(0, i + 1));
+        i++;
+      } else clearInterval(timer);
+    }, speed);
+    return () => clearInterval(timer);
+  }, [text, speed]);
+  return <span>{display}<span className="animate-pulse">|</span></span>;
+}
+
+const BRANDS = ["faber", "glen", "hafele", "kaff", "siemens"];
+
+const servicesData = [
+  {
+    id: "not-work",
+    title: "Chimney Not Working",
+    icon: "⚡",
+    color: "bg-red-500",
+    short: "Power / Motor Dead",
+    longDesc: `If your BRAND chimney is completely not working, not starting, no display, no light, button not responding, motor not running, suction zero. This is a major issue. Our expert technician will visit in 60 mins. We check full power supply, switch board, PCB, capacitor, wiring, fuse, motor. BRAND chimneys often face this due to power fluctuation, carbon in motor, oil blockage, loose connection. We provide same day repair with 90 days warranty. We have fixed 10,000+ chimneys in Noida, Ghaziabad, Delhi NCR. We use original spare parts. Common causes: motor jam, capacitor failure, PCB burn, switch fault, thermal overload. Our process: full dismantle, deep check, motor servicing, PCB repair, wiring fix. We clean oil and grease which causes motor jam. We test motor with meter, replace if needed. We provide bill and warranty. Book now for instant fix. Service available 8am-8pm all 7 days. Best price, no hidden charge. Trained and verified staff.`
+  },
+  {
+    id: "noise",
+    title: "Chimney Noise Problem",
+    icon: "🔊",
+    color: "bg-blue-600",
+    short: "Loud Sound / Vibration",
+    longDesc: `Is your BRAND chimney making loud noise, ghar ghar, tak tak, vibration, heavy sound? This is due to bearing damage, blower imbalance, dust in fan, loose screw, motor jam, oil dry. Our team provides complete solution. We open full chimney, clean blower, fan, motor, duct pipe. We replace bearing, do oiling, tighten all screws. After our service your chimney will be silent like new. Noise comes after 1-2 years due to grease. We have fixed 5000+ noise complaints for BRAND. We use special tools. We check duct loose, motor alignment, fan balancing. We provide 90 days warranty. Same day 60 mins doorstep service. We clean filter, oil collector, motor body. We also provide deep cleaning with noise fix. No extra visit charge. Affordable price. Original parts. Book now and get silent chimney.`
+  },
+  {
+    id: "deep-clean",
+    title: "Chimney Deep Cleaning",
+    icon: "✨",
+    color: "bg-green-600",
+    short: "Full Grease Removal",
+    longDesc: `Professional BRAND chimney deep cleaning service in your area. We remove 100% oil, grease, soot, dirt from filters, blower, motor, pipe, oil collector. Your suction will be double after cleaning. We clean baffle filter, cassette filter, charcoal filter, fan, motor. We use machine and eco-friendly chemical. Regular cleaning every 3-4 months is must. Our service includes full dismantle, wash, dry, refit. 60 mins doorstep service. 10,000+ happy customers trust us. Same day service, Rs 499 only. We clean all models of BRAND - auto clean, manual, filterless. We provide bill and 30 days warranty on cleaning. Our staff is trained, verified, uniformed. No hidden charge. After cleaning kitchen will be fresh, no smoke, no oil. Book now for deep cleaning. Best service near you. We also do duct cleaning.`
+  },
+];
 
 export default function Page({ params }: { params: { slug: string } }) {
-  const [showPopup, setShowPopup] = useState(false)
-  useEffect(() => {
-    const t = setTimeout(() => setShowPopup(true), 4000)
-    return () => clearTimeout(t)
-  }, [])
+  const slug = params?.slug;
+  if (!slug) return notFound();
 
-  const slug = params.slug;
-  let brand = "Faber";
-  let areaKey = slug;
-  if (slug.includes("-chimney-service-")) {
-    const p = slug.split("-chimney-service-");
-    brand = p[0].charAt(0).toUpperCase() + p[0].slice(1);
-    areaKey = p[1];
-  }
-  const areaName = areas[areaKey] || areaKey.replace(/-/g, " ").replace(/\b\w/g, (l: string) => l.toUpperCase());
+  const brandSlug = BRANDS.find(b => slug.startsWith(b)) || "ncr";
+  const Brand = brandSlug.charAt(0).toUpperCase() + brandSlug.slice(1);
+  const areaRaw = slug.replace(brandSlug, "").replace(/^-/, "").replace(/-/g, " ");
+  const Area = areaRaw.split(" ").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
+  const fullTitle = `${Brand} Chimney Service in ${Area}`;
+
+  const [openId, setOpenId] = useState<string | null>(null);
+  const [showPopup, setShowPopup] = useState(false);
+  const [showForm, setShowForm] = useState(false);
+  const phone = "8796284796";
+
+  const getMsg = (service: string) => `Hi, I need ${service} for my ${Brand} Chimney in ${Area}. Please send technician in 60 mins. My address: `;
 
   return (
-    <div style={{background:'#f5f5f5', minHeight:'100vh', paddingBottom:'100px', fontFamily:'system-ui, sans-serif'}}>
+    <div className="min-h-screen bg-[#f6f6f6] pb-28">
+      {/* Header */}
+      <div className="bg-black text-white p-4 flex justify-between items-center sticky top-0 z-20">
+        <div className="font-black text-lg tracking-wide">{Brand.toUpperCase()} • NCR</div>
+        <a href={`tel:${phone}`} className="bg-yellow-400 text-black px-4 py-2 rounded-full font-bold text-sm">Call Expert</a>
+      </div>
 
-      {/* POPUP */}
+      <div className="p-4 max-w-xl mx-auto">
+        {/* Hero */}
+        <div className="bg-white rounded-[28px] p-6 shadow-sm">
+          <h1 className="text-[32px] font-black leading-[1.1] min-h-[110px] text-black">
+            <TypeWriter text={fullTitle} />
+          </h1>
+          <p className="text-gray-500 mt-4 text-[15px]">Expert Repair, Deep Cleaning & Installation. 60 Mins Doorstep Service in {Area}.</p>
+          <div className="grid grid-cols-2 gap-3 mt-6">
+            <button onClick={() => setShowPopup(true)} className="bg-green-600 text-white rounded-full py-4 font-black text-[15px]">CALL NOW</button>
+            <a href={`https://wa.me/91${phone}?text=${encodeURIComponent(getMsg("Service"))}`} className="bg-black text-white rounded-full py-4 font-bold text-center text-[15px]">WhatsApp</a>
+          </div>
+          <button onClick={() => setShowForm(true)} className="w-full mt-3 border-2 border-black rounded-full py-3 font-bold">📅 Book Service Now</button>
+          <p className="text-center mt-3 text-[13px]">⭐ 4.8/5 • 10,000+ Customers • 90 Days Warranty</p>
+        </div>
+
+        {/* Book Form */}
+        {showForm && (
+          <div className="bg-white rounded-[24px] p-5 mt-4 shadow-lg border-2 border-yellow-400">
+            <div className="flex justify-between"><h3 className="font-black text-lg">Book {Brand} Service</h3><button onClick={()=>setShowForm(false)}>✕</button></div>
+            <p className="text-sm text-gray-500">Service in {Area}</p>
+            <div className="mt-4 flex flex-col gap-3">
+              <input className="border p-3 rounded-xl" placeholder="Your Name" />
+              <input className="border p-3 rounded-xl" placeholder="Mobile Number" />
+              <input className="border p-3 rounded-xl bg-gray-100" value={Brand + " Chimney"} readOnly />
+              <input className="border p-3 rounded-xl bg-gray-100" value={Area} readOnly />
+              <select className="border p-3 rounded-xl"><option>Chimney Not Working</option><option>Noise Problem</option><option>Deep Cleaning</option></select>
+              <a href={`tel:${phone}`} className="bg-green-600 text-white rounded-full py-4 font-black text-center">SUBMIT & CALL NOW</a>
+            </div>
+          </div>
+        )}
+
+        {/* Service Cards */}
+        <h2 className="font-black text-xl mt-8 mb-3">Our Professional Services</h2>
+        <div className="flex flex-col gap-4">
+          {servicesData.map(s => (
+            <div key={s.id} onClick={() => setOpenId(openId === s.id? null : s.id)} className="bg-white rounded-[20px] p-4 shadow-sm border cursor-pointer">
+              <div className="flex items-center gap-3">
+                <div className={`${s.color} w-12 h-12 rounded-full flex items-center justify-center text-white text-xl`}>{s.icon}</div>
+                <div className="flex-1"><h3 className="font-black">{s.title}</h3><p className="text-xs text-gray-500">{s.short}</p></div>
+                <span className="text-gray-400">{openId === s.id? "▲" : "▼"}</span>
+              </div>
+              {openId === s.id && (
+                <div className="mt-4 pt-4 border-t">
+                  <p className="text-[13.5px] leading-6 text-gray-700">{s.longDesc.replaceAll("BRAND", Brand)}</p>
+                  <div className="grid grid-cols-2 gap-3 mt-5">
+                    <a href={`tel:${phone}`} className="bg-green-600 text-white rounded-full py-3 font-black text-center text-sm">CALL NOW</a>
+                    <a href={`https://wa.me/91${phone}?text=${encodeURIComponent(getMsg(s.title))}`} className="bg-black text-white rounded-full py-3 font-bold text-center text-sm">WhatsApp Auto</a>
+                  </div>
+                  <p className="text-[10px] text-center text-gray-400 mt-2">Number hide hai, tap karte hi auto message type hoga</p>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Expert Popup */}
       {showPopup && (
-        <div style={{position:'fixed', inset:0, background:'rgba(0,0,0,0.75)', zIndex:999, display:'flex', alignItems:'center', justifyContent:'center', padding:'20px'}}>
-          <div style={{background:'white', borderRadius:'32px', padding:'30px 24px', textAlign:'center' as any, maxWidth:'360px', width:'100%'}}>
-            <div style={{width:'60px', height:'60px', background:'#16a34a', borderRadius:'999px', display:'flex', alignItems:'center', justifyContent:'center', margin:'0 auto', fontSize:'28px'}}>📞</div>
-            <h2 style={{fontSize:'22px', fontWeight:900, marginTop:'16px', lineHeight:'24px', color:'black'}}>Expert Available in {areaName}!</h2>
-            <p style={{fontSize:'14px', color:'#666', marginTop:'8px'}}>Need {brand} Chimney Service? Technician 60 Mins me pahuchega.</p>
-            <a href="tel:8796284796" style={{display:'block', background:'#16a34a', color:'white', padding:'18px', borderRadius:'999px', fontWeight:900, textDecoration:'none', marginTop:'22px', fontSize:'16px'}}>CALL NOW - 8796284796</a>
-            <button onClick={()=>setShowPopup(false)} style={{marginTop:'14px', background:'none', border:'none', color:'#aaa', fontSize:'13px'}}>Close</button>
+        <div className="fixed inset-0 bg-black/70 z-50 flex items-end sm:items-center justify-center p-4">
+          <div className="bg-white rounded-[28px] p-6 w-full max-w-sm animate-in">
+            <h3 className="font-black text-2xl">Talk to {Brand} Expert</h3>
+            <p className="text-gray-500 mt-2 text-sm">Get instant solution for {Brand} Chimney in {Area}. 60 Mins doorstep visit.</p>
+            <div className="flex flex-col gap-3 mt-6">
+              <a href={`tel:${phone}`} className="bg-green-600 text-white rounded-full py-4 font-black text-center">CALL NOW - 60 MINS SERVICE</a>
+              <a href={`https://wa.me/91${phone}?text=${encodeURIComponent(getMsg("Expert Help"))}`} className="bg-black text-white rounded-full py-4 font-bold text-center">Chat on WhatsApp (Auto Type)</a>
+              <button onClick={() => setShowPopup(false)} className="text-gray-500 py-2 text-sm">Close</button>
+            </div>
           </div>
         </div>
       )}
 
-      {/* HEADER */}
-      <div style={{background:'black', color:'white', padding:'18px 20px', display:'flex', justifyContent:'space-between', alignItems:'center', position:'sticky', top:0, zIndex:10}}>
-        <div style={{fontWeight:900, lineHeight:'14px', fontSize:'15px'}}>NCR CHIMNEY<br/>SERVICE</div>
-        <a href="tel:8796284796" style={{background:'#facc15', color:'black', padding:'10px 18px', borderRadius:'999px', fontWeight:900, textDecoration:'none', fontSize:'13px'}}>8796284796</a>
+      {/* Bottom Sticky */}
+      <div className="fixed bottom-0 left-0 right-0 bg-white border-t p-3 flex gap-3 max-w-xl mx-auto">
+        <a href={`tel:${phone}`} className="flex-1 bg-green-600 text-white rounded-full py-3 font-black text-center text-sm">CALL NOW</a>
+        <a href={`https://wa.me/91${phone}?text=${encodeURIComponent(getMsg("Service"))}`} className="flex-1 bg-black text-white rounded-full py-3 font-bold text-center text-sm">WhatsApp</a>
       </div>
 
-      {/* HERO */}
-      <div style={{background:'white', margin:'14px', borderRadius:'32px', padding:'36px 24px', border:'1px solid #e9e9e9', textAlign:'center' as any, boxShadow:'0 8px 24px rgba(0,0,0,0.04)'}}>
-        <span style={{fontSize:'11px', background:'#f1f1f1', border:'1px solid #e5e5e5', padding:'8px 14px', borderRadius:'999px', fontWeight:700, letterSpacing:'0.5px'}}>CERTIFIED SERVICE IN {areaName.toUpperCase()}</span>
-        <h1 style={{fontSize:'38px', fontWeight:900, marginTop:'18px', lineHeight:'36px', color:'black', letterSpacing:'-1.5px'}}>{brand} Chimney Service in {areaName}</h1>
-        <p style={{fontSize:'15px', color:'#666', marginTop:'14px', lineHeight:'21px'}}>Professional Repair, Deep Cleaning & Installation by Certified Experts. Same Day 60 Mins Visit.</p>
-        <div style={{display:'flex', gap:'12px', marginTop:'28px'}}>
-          <a href="tel:8796284796" style={{flex:1, background:'#16a34a', color:'white', padding:'18px', borderRadius:'999px', fontWeight:900, textDecoration:'none'}}>CALL NOW</a>
-          <a href="https://wa.me/918796284796" style={{flex:1, background:'black', color:'white', padding:'18px', borderRadius:'999px', fontWeight:900, textDecoration:'none'}}>WhatsApp</a>
-        </div>
-        <div style={{marginTop:'16px', fontSize:'12px', fontWeight:700}}>⭐ 4.8/5 • 10,000+ Happy Customers • 90 Days Warranty</div>
-      </div>
-
-      {/* PROFESSIONAL OUR SERVICES */}
-      <div style={{padding:'0 14px', marginTop:'10px'}}>
-        <h2 style={{fontSize:'22px', fontWeight:900, margin:'0 6px 14px'}}>Our Professional Services</h2>
-        <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:'12px'}}>
-          <div style={{background:'white', padding:'22px 18px', borderRadius:'22px', border:'1px solid #eee'}}><div style={{fontSize:'28px'}}>🧹</div><b style={{fontSize:'14px', display:'block', marginTop:'10px'}}>Certified Deep Cleaning</b><p style={{fontSize:'11px', color:'#777', marginTop:'6px', lineHeight:'15px'}}>Advanced Oil & Carbon Removal Technology</p></div>
-          <div style={{background:'white', padding:'22px 18px', borderRadius:'22px', border:'1px solid #eee'}}><div style={{fontSize:'28px'}}>⚙️</div><b style={{fontSize:'14px', display:'block', marginTop:'10px'}}>Motor Restoration</b><p style={{fontSize:'11px', color:'#777', marginTop:'6px', lineHeight:'15px'}}>Suction & Noise Issue Expert Fix</p></div>
-          <div style={{background:'white', padding:'22px 18px', borderRadius:'22px', border:'1px solid #eee'}}><div style={{fontSize:'28px'}}>🔄</div><b style={{fontSize:'14px', display:'block', marginTop:'10px'}}>Premium Filter Replacement</b><p style={{fontSize:'11px', color:'#777', marginTop:'6px', lineHeight:'15px'}}>Genuine Baffle & Charcoal Filter</p></div>
-          <div style={{background:'white', padding:'22px 18px', borderRadius:'22px', border:'1px solid #eee'}}><div style={{fontSize:'28px'}}>🔧</div><b style={{fontSize:'14px', display:'block', marginTop:'10px'}}>Professional Installation</b><p style={{fontSize:'11px', color:'#777', marginTop:'6px', lineHeight:'15px'}}>Ducting & New Setup Solutions</p></div>
-        </div>
-      </div>
-{/* PRICE SECTION - 1250 / 2250 - GOOGLE AI KE LIYE */}
-      <div style={{background:'white', margin:'14px', borderRadius:'22px', padding:'22px', border:'1px solid #eee'}}>
-        <h2 style={{fontSize:'19px', fontWeight:900}}>Service and Maintenance Estimates for {brand} in {areaName}</h2>
-        <p style={{fontSize:'13px', color:'#666', marginTop:'8px'}}>Cleaning, inspection or basic service visit charges generally start around ₹250 to ₹300, while comprehensive deep cleaning and maintenance packages range from ₹499 up to ₹2,250.</p>
-        <ul style={{marginTop:'16px', paddingLeft:'20px'}}>
-          <li style={{fontSize:'14px', marginBottom:'10px'}}><b>Inspection / Visit Charge:</b> ₹299</li>
-          <li style={{fontSize:'14px', marginBottom:'10px'}}><b>Basic General Service:</b> ₹249 – ₹599</li>
-          <li style={{fontSize:'14px', marginBottom:'10px'}}><b>Deep Cleaning:</b> ₹1250</li>
-          <li style={{fontSize:'14px', marginBottom:'10px'}}><b>Top Model / Heavy Cleaning:</b> ₹2250</li>
-        </ul>
-      </div>
-      {/* WHY US BADA */}
-      <div style={{background:'white', margin:'18px 14px', borderRadius:'26px', padding:'26px', border:'1px solid #eee'}}>
-        <h2 style={{fontSize:'19px', fontWeight:900}}>Why {areaName} Trusts Us?</h2>
-        <div style={{marginTop:'18px', fontSize:'14px', lineHeight:'22px', color:'#333'}}>
-          ✓ 60 Mins Technician Visit in {areaName}<br/>✓ All {brand} Models Supported<br/>✓ 90 Days Service Warranty<br/>✓ Pay After Service - No Advance
-        </div>
-      </div>
-
-      {/* FOOTER SAFE */}
-      <div style={{background:'black', margin:'0 14px', borderRadius:'22px', padding:'20px', textAlign:'center' as any}}>
-        <p style={{fontSize:'11px', fontWeight:800, color:'#facc15', letterSpacing:'1px'}}>NCR CHIMNEY SERVICE</p>
-        <p style={{fontSize:'9px', color:'#666', marginTop:'10px', lineHeight:'13px'}}>Independent service provider. Not authorized by {brand}. {brand} name used for reference only. Service in Noida & Ghaziabad only.</p>
-      </div>
-
-      {/* FIXED BUTTON */}
-      <div style={{position:'fixed', bottom:0, left:0, right:0, background:'white', padding:'12px', display:'flex', gap:'12px', borderTop:'1px solid #eee', zIndex:50, boxShadow:'0 -4px 20px rgba(0,0,0,0.08)'}}>
-        <a href="tel:8796284796" style={{flex:1, background:'#16a34a', color:'white', padding:'16px', borderRadius:'999px', fontWeight:900, textAlign:'center' as any, textDecoration:'none', fontSize:'14px'}}>CALL 8796284796</a>
-        <a href="https://wa.me/918796284796" style={{flex:1, background:'black', color:'white', padding:'16px', borderRadius:'999px', fontWeight:900, textAlign:'center' as any, textDecoration:'none', fontSize:'14px'}}>WhatsApp</a>
-      </div>
+      <style>{`@keyframes blink {0%,50%{opacity:1}51%,100%{opacity:0}}.animate-pulse{animation:blink 1s infinite}`}</style>
     </div>
-  )
+  );
 }
