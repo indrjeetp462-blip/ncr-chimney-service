@@ -13,9 +13,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [
     { url: base, lastModified: new Date() },
-    ...slugs.map(slug => ({
-      url: `${base}/${slug}`,
+    ...slugs.map((slug) => ({
+      url: `${base}/s/${slug}`,
       lastModified: new Date(),
-    }))
+    })),
   ]
 }
