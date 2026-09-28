@@ -2,12 +2,37 @@ import "./globals.css";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Chimney Service Repair Near Me in Noida Ghaziabad - Service, Repair, Cleaning, Not Working",
-  description: "Chimney Service Repair Near Me in Noida Ghaziabad. Expert for chimney service, chimney repair, chimney not working, chimney repair near me, chimney service near me, chimney cleaning Ghaziabad, chimney service Noida. Same day doorstep service in Jaypee Greens, Sector 150, Wishtown 128, Indirapuram, Vaishali Sec 5, Raj Nagar.",
-  manifest: "manifest.json",
+  title: "Faber Glen Kaff Siemens Hafele Chimney Service Repair Installation Cleaning",
+  description: "Faber, Glen, Kaff, Siemens, Hafele Chimney Service, Repair, Not Working, Noise, Installation, Cleaning Near Me in Noida Ghaziabad. Best chimney service, repair, installation, cleaning at same day.",
+  manifest: "/manifest.json",
   themeColor: "#ff6600",
   applicationName: "Chimney Service Repair",
-  keywords: ["chimney service", "chimney repair", "chimney not working", "chimney repair near me", "chimney service near me", "chimney cleaning ghaziabad", "chimney service noida", "chimney repair noida ghaziabad"],
+  keywords: [
+    "faber chimney service",
+    "faber chimney not working",
+    "faber chimney repair",
+    "faber chimney noise",
+    "glen chimney service",
+    "glen chimney not working",
+    "glen chimney repair",
+    "glen chimney noise",
+    "kaff chimney service",
+    "kaff chimney not working",
+    "kaff chimney repair",
+    "kaff chimney noise",
+    "siemens chimney service",
+    "siemens chimney not working",
+    "siemens chimney repair",
+    "siemens chimney noise",
+    "hafele chimney service",
+    "hafele chimney not working",
+    "hafele chimney repair",
+    "hafele chimney noise",
+    "chimney service",
+    "chimney repair",
+    "chimney installation",
+    "chimney cleaning"
+  ],
 };
 
 export default function RootLayout({
