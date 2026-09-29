@@ -41,7 +41,7 @@ export default function Home(){
   </div>
 
   <div style={{padding:'24px 16px 12px'}}>
-   <h1 style={{fontSize:24, fontWeight:900, margin:0, lineHeight:1.2}}>{BrandCap} Chimney Service & Cleaning in {area} - 30 Min Visit | Professional Technician</h1>
+   <h1 style={{fontSize:24, fontWeight:900, margin:0, lineHeight:1.2}}>{BrandCap === "Chimney"? "Chimney" : `${BrandCap} Chimney`} Service & Cleaning in {area} - 30 Min Visit | Professional Technician</h1>
    <div style={{display:'flex', alignItems:'center', gap:8, marginTop:10}}><span style={{background:'#0f7a0f', color:'#fff', padding:'4px 10px', borderRadius:6, fontSize:13, fontWeight:700}}>★ 4.6</span><span style={{fontSize:13, color:'#555'}}>335 reviews • Trusted • Same Day Service in {area} • 10k+ Customers</span></div>
   </div>
 
