@@ -2,36 +2,18 @@ import "./globals.css";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Chimney Service - 30 Min Arrival | Noida & Ghaziabad | 90 Day Warranty",
-  description: "Faber, Glen, Kaff, Siemens, Hafele Chimney Service, Repair, Not Working, Noise, Installation, Cleaning Near Me in Noida Ghaziabad. Best chimney service, repair, installation, cleaning at same day.",
+  title: "Chimney Service Noida & Ghaziabad | Faber, Glen, Kaff, Hafele, Siemens",
+  description: "Expert Chimney Service for Faber, Glen, Kaff, Siemens & Hafele in Noida & Ghaziabad. Repair, Cleaning & Installation in 30 Min + 90 Day Warranty.",
   manifest: "/manifest.json",
   themeColor: "#ff6600",
   applicationName: "Chimney Service Repair",
   keywords: [
     "faber chimney service",
-    "faber chimney not working",
-    "faber chimney repair",
-    "faber chimney noise",
-    "glen chimney service",
-    "glen chimney not working",
-    "glen chimney repair",
-    "glen chimney noise",
+    "glen chimney service", 
     "kaff chimney service",
-    "kaff chimney not working",
-    "kaff chimney repair",
-    "kaff chimney noise",
     "siemens chimney service",
-    "siemens chimney not working",
-    "siemens chimney repair",
-    "siemens chimney noise",
     "hafele chimney service",
-    "hafele chimney not working",
-    "hafele chimney repair",
-    "hafele chimney noise",
-    "chimney service",
-    "chimney repair",
-    "chimney installation",
-    "chimney cleaning"
+    "chimney service noida"
   ],
 };
 
@@ -43,7 +25,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <meta name="google-site-verification" content="n3qt1n4VOu3Oh7e_YJ6IDTHqAPxuvlJeQlLtljIVSoU" />
+        <meta name="google-site-verification" content="n3qt1n4VDu3O7h3e_YJ6IDtHqAPxvu1JeQiL1jIV5oU" />
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#ff6600" />
         <link rel="apple-touch-icon" href="/favicon.ico" />
