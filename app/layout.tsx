@@ -2,7 +2,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Faber Glen Kaff Siemens Hafele Chimney Service Repair Installation Cleaning",
+  title: "Chimney Service - 30 Min Arrival | Noida & Ghaziabad | 90 Day Warranty",
   description: "Faber, Glen, Kaff, Siemens, Hafele Chimney Service, Repair, Not Working, Noise, Installation, Cleaning Near Me in Noida Ghaziabad. Best chimney service, repair, installation, cleaning at same day.",
   manifest: "/manifest.json",
   themeColor: "#ff6600",
