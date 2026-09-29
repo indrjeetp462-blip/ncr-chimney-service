@@ -22,15 +22,15 @@ export default function Page({ params }: any){
  const [showPopup, setShowPopup] = useState(false)
  const [typed, setTyped] = useState("")
  const phone="8796284796"
- const fullText = `Professional ${Brand} chimney service repair in ${area} near ${areaData.near}. We repair not working, heavy noise, low suction, auto clean failure, oil leakage, motor burning, PCB failure same day in PIN ${areaData.pin}.`
+ const fullText = `Professional ${Brand.toLowerCase()==="chimney"?"Chimney":`${Brand} chimney`} service repair in ${area} near ${areaData.near}. We repair not working, heavy noise, low suction, auto clean failure, oil leakage, motor burning, PCB failure same day in PIN ${areaData.pin}.`
 
  useEffect(()=>{
-   document.title=`${Brand} Chimney Service Not Working in ${area}`
+   document.title=`${Brand.toLowerCase()==="chimney"?"Chimney":`${Brand} Chimney`} Service Not Working in ${area} PIN ${areaData.pin}`
    const t=setTimeout(()=>setShowPopup(true),4000)
    let i=0
    const ti=setInterval(()=>{ setTyped(fullText.slice(0,i)); i++; if(i>fullText.length) clearInterval(ti) },60)
    return()=>{ clearTimeout(t); clearInterval(ti) }
- },[fullText])
+ },[fullText, Brand, area, areaData.pin])
 
  const scrollToForm=()=>{ formRef.current?.scrollIntoView({behavior:'smooth'}); setShowPopup(false) }
  const handleCall=()=>{ window.location.href=`tel:${phone}` }
@@ -52,7 +52,7 @@ export default function Page({ params }: any){
 
   <div style={{padding:14}}>
     <div style={{background:isKaff?'#dc2626':'#111',color:'#fff',padding:'22px 18px',borderRadius:20,boxShadow:'0 12px 30px rgba(0,0,0,0.2)'}}>
-      <h1 style={{fontSize:isKaff?28:24,fontWeight:900,lineHeight:1.25,margin:0}}>{Brand} Chimney Service Not Working in {area} - Pincode {areaData.pin} - 30 Min Visit</h1>
+      <h1 style={{fontSize:isKaff?28:24,fontWeight:900,lineHeight:1.25,margin:0}}>{Brand.toLowerCase()==="chimney"?"Chimney":`${Brand} Chimney`} Service Not Working in {area} - Pincode {areaData.pin} - 30 Min Visit</h1>
       <div style={{marginTop:12,fontSize:12,background:'rgba(255,255,255,0.2)',display:'inline-block',padding:'6px 12px',borderRadius:20}}>Professional {Brand} Service Repair • {areaData.near} • PIN {areaData.pin}</div>
     </div>
 
