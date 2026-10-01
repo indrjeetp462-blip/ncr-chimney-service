@@ -70,7 +70,7 @@ export default function Page({ params }: { params: { slug: string } }) {
   }, [brand])
 
   useEffect(() => {
-    document.title = `Independent ${brand} Chimney Service in ${area.name} - 45 Min Visit - PIN ${area.pin}`
+    document.title = `${brand} Chimney Service in ${area.name} - 45 Min Visit - PIN ${area.pin} - Independent`
     const i1 = setInterval(() => setCurrentSlide(p => (p + 1) % slides.length), 3000)
     const pop = setTimeout(() => setShowCallPopup(true), 8000)
     return () => { clearInterval(i1); clearTimeout(pop) }
