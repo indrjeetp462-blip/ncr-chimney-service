@@ -2,12 +2,12 @@ import type { Metadata } from "next";
 import ClientSlug from "./ClientSlug";
 
 const areaInfo:any = {
-  "jaypee-greens-greater-noida": { full: "Jaypee Greens Greater Noida", pin: "201310", near: "Pari Chowk", map: "Jaypee Greens Greater Noida" },
-  "sector-150-noida": { full: "Sector 150 Noida", pin: "201310", near: "Sports City", map: "Sector 150 Noida" },
-  "jaypee-wishtown-sector-128-noida": { full: "Wishtown Sector 128 Noida", pin: "201304", near: "JP Hospital", map: "Jaypee Wishtown Sector 128 Noida" },
-  "indirapuram-ghaziabad": { full: "Indirapuram Ghaziabad", pin: "201014", near: "Shipra Mall", map: "Indirapuram Ghaziabad" },
-  "vaishali-sector-5-ghaziabad": { full: "Vaishali Sector 5 Ghaziabad", pin: "201010", near: "Vaishali Metro", map: "Vaishali Sector 5 Ghaziabad" },
-  "raj-nagar-ghaziabad": { full: "Raj Nagar Ghaziabad", pin: "201002", near: "RDC", map: "Raj Nagar Ghaziabad" },
+  "jaypee-greens-greater-noida": { full: "Jaypee Greens Greater Noida", pin: "201310", near: "Pari Chowk" },
+  "sector-150-noida": { full: "Sector 150 Noida", pin: "201310", near: "Sports City" },
+  "jaypee-wishtown-sector-128-noida": { full: "Wishtown Sector 128 Noida", pin: "201304", near: "JP Hospital" },
+  "indirapuram-ghaziabad": { full: "Indirapuram Ghaziabad", pin: "201014", near: "Shipra Mall" },
+  "vaishali-sector-5-ghaziabad": { full: "Vaishali Sector 5 Ghaziabad", pin: "201010", near: "Vaishali Metro" },
+  "raj-nagar-ghaziabad": { full: "Raj Nagar Ghaziabad", pin: "201002", near: "RDC" },
 }
 
 function getData(slug:string){
@@ -21,15 +21,18 @@ function getData(slug:string){
       if(lower.includes(k)){ info = areaInfo[k]; break; }
     }
   }
-  if(!info) info = { full: areaKey.replace(/-/g," ").replace(/\b\w/g:(l:any)=>l.toUpperCase()), pin: "201301", near: "NCR", map: areaKey };
-  return { Brand, brandRaw, area: info.full, pin: info.pin, near: info.near, map: info.map };
+  if(!info){
+    const nice = areaKey.replace(/-/g," ").replace(/\b\w/g, (l:string)=>l.toUpperCase());
+    info = { full: nice, pin: "201301", near: "NCR" };
+  }
+  return { Brand, brandRaw, area: info.full, pin: info.pin, near: info.near };
 }
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const { Brand, area } = getData(params.slug);
   return {
     title: `${Brand} Chimney Service in ${area} - 30 Min Visit`,
-    description: `${Brand} Chimney Service in ${area} - Same Day Service, 45 Min Arrival, 30 Day Warranty. Call 8796284796`,
+    description: `${Brand} Chimney Service in ${area} - Same Day Service. Call 8796284796`,
   };
 }
 
