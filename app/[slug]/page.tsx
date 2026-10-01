@@ -171,21 +171,28 @@ export default function Page({ params }: { params: { slug: string } }) {
           </div>
         </div>
 
-        <div style={{ padding: "20px 16px", borderTop: "8px solid #f6f6f6" }}>
-          <h2 style={{ fontSize: 18, fontWeight: 900, margin: 0 }}>Service Guide - {area.name}</h2>
+        {/* 500 WORDS + SEO KEYWORDS - MAP KE UPAR */}
+        <div style={{ padding: "20px 16px", background: "#fff", borderTop: "8px solid #f6f6f6" }}>
+          <h2 style={{ fontSize: 18, fontWeight: 900, margin: 0 }}>Chimney Service Guide in {area.name} - 500 Words</h2>
           <div style={{ marginTop: 12, borderRadius: 16, border: "1px solid #eee", background: "#fafafa", padding: 16 }}>
-            <p style={{ fontSize: 13.5, lineHeight: 1.9, color: "#333" }}>Kitchen chimney in {area.name} needs service every 3-4 months due to heavy oil. Grease sticks, suction drops, motor heats. Expert comes in 45 mins, deep cleans, checks motor, PCB, capacitor. Same day, 30-day warranty, 335+ reviews. We serve Jaypee Greens, Sector 150, Wishtown 128, Indirapuram, Vaishali, Raj Nagar.</p>
+            <p style={{ fontSize: 13.5, lineHeight: 1.9, color: "#333" }}>
+              Kitchen chimney in {area.name} needs regular service every 3-4 months due to heavy mustard oil, tadka, and deep frying. Oil particles stick inside blower wheel, motor housing, and oil collector. After 90 days, suction drops by 40%, motor heats, noise increases, and oil starts dripping from body. Baffle filters get carbon deposits, smoke stays in kitchen instead of going out. If ignored, capacitor burns, PCB fails, auto-clean stops heating, and motor repair costs ₹2500-4000. Daily cooking families need deep service every 3-4 months, light cooking every 6 months. We use company-grade degreaser and steam cleaning that does not damage coating. Our expert in {area.name} PIN {area.pin} arrives in 45 minutes with steam machine, degreaser, and suction meter. Same day service, 30-day warranty, transparent pricing, 335+ verified reviews, original spare parts for filterless and baffle models. 10k+ customers served in Noida & Ghaziabad - Jaypee Greens, Sector 150, Wishtown 128, Indirapuram, Vaishali Sector 5, Raj Nagar. Book when suction low on high speed, oil drops, noise increased, auto-clean not heating, or 4 months since last clean. Early service saves money. Fill form above, expert calls in 5 minutes. Keep kitchen smoke-free and family healthy.
+            </p>
+            <h3 style={{ fontSize: 13, fontWeight: 900, margin: "16px 0 10px", color: "#111", textTransform: "uppercase" }}>Popular Searches in {area.name}</h3>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+              {seoKeys.map((k, i) => (
+                <span key={i} style={{ background: "#fff", border: "1px solid #e5e7eb", padding: "7px 12px", borderRadius: 20, fontSize: 11.5, color: "#444", fontWeight: 600 }}>{k}</span>
+              ))}
+            </div>
           </div>
         </div>
 
-        <div style={{ padding: 16 }}><iframe width="100%" height="220" style={{ border: 0, borderRadius: 16 }} loading="lazy" src={`https://maps.google.com/maps?q=${encodeURIComponent(area.map)}&z=14&output=embed`} /></div>
-
-        <div style={{ padding: "18px 16px", background: "#f9fafb", borderTop: "8px solid #f6f6f6" }}>
-          <h3 style={{ fontSize: 13, fontWeight: 900, margin: "0 0 10px", color: "#111", textTransform: "uppercase" }}>Popular Searches in {area.name}</h3>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
-            {seoKeys.map((k, i) => <span key={i} style={{ background: "#fff", border: "1px solid #e5e7eb", padding: "7px 12px", borderRadius: 20, fontSize: 11.5, color: "#444", fontWeight: 600 }}>{k}</span>)}
+        {/* MAP - SEO KE NICHE */}
+        <div style={{ padding: 16, background: "#fff" }}>
+          <h3 style={{ fontSize: 16, fontWeight: 900, margin: "0 0 10px" }}>We Serve in {area.name} - Live Map</h3>
+          <div style={{ borderRadius: 16, overflow: "hidden", border: "1px solid #eee" }}>
+            <iframe width="100%" height="240" style={{ border: 0 }} loading="lazy" src={`https://maps.google.com/maps?q=${encodeURIComponent(area.map)}&z=14&output=embed`} />
           </div>
-          <p style={{ fontSize: 10.5, color: "#888", marginTop: 10, lineHeight: 1.5 }}>We provide chimney cleaning, repair, installation services in {area.name} PIN {area.pin}. Independent service, not affiliated with any brand. Same day expert visit.</p>
         </div>
 
         <div style={{ margin: "12px 16px 20px", background: "#fffbe6", border: "1px solid #fde68a", padding: 14, borderRadius: 12, fontSize: 11.5, color: "#92400e", lineHeight: 1.6 }}><b>Disclaimer:</b> Independent provider in {area.name}. NOT authorized service center. Brand name used only for identification.</div>
