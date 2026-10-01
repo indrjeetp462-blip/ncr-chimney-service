@@ -8,6 +8,10 @@ export default function Page({ params }: { params: { slug: string } }) {
   const [currentSlide, setCurrentSlide] = useState(0)
   const [tab, setTab] = useState("Service")
   const [showCallPopup, setShowCallPopup] = useState(false)
+  const [showWelcome, setShowWelcome] = useState(true)
+  const [typedText1, setTypedText1] = useState("")
+  const [typedBrand, setTypedBrand] = useState("")
+  const [typedText2, setTypedText2] = useState("")
   const [name, setName] = useState("")
   const [mobile, setMobile] = useState("")
   const [address, setAddress] = useState("")
@@ -48,15 +52,59 @@ export default function Page({ params }: { params: { slug: string } }) {
 
   const { brand, area } = getData()
 
+  // TYPEWRITER EFFECT - NOT TOO FAST NOT TOO SLOW
+  useEffect(() => {
+    const text1 = "Welcome to"
+    const brandText = brand.toUpperCase()
+    const text2 = " CHIMNEY SERVICE"
+    let i = 0
+    let j = 0
+    let k = 0
+    let phase = 1
+
+    const typingInterval = setInterval(() => {
+      if (phase === 1) {
+        if (i < text1.length) {
+          setTypedText1(text1.slice(0, i + 1))
+          i++
+        } else {
+          phase = 2
+        }
+      } else if (phase === 2) {
+        if (j < brandText.length) {
+          setTypedBrand(brandText.slice(0, j + 1))
+          j++
+        } else {
+          phase = 3
+        }
+      } else if (phase === 3) {
+        if (k < text2.length) {
+          setTypedText2(text2.slice(0, k + 1))
+          k++
+        } else {
+          clearInterval(typingInterval)
+          // 1 sec ruk ke welcome hide
+          setTimeout(() => setShowWelcome(false), 1000)
+        }
+      }
+    }, 90) // 90ms = medium speed - na fast na slow
+
+    return () => clearInterval(typingInterval)
+  }, [brand])
+
   useEffect(() => {
     document.title = `${brand} Chimney Service in ${area.name}`
     const i1 = setInterval(() => setCurrentSlide(p => (p + 1) % slides.length), 3000)
-    const pop = setTimeout(() => setShowCallPopup(true), 7000)
+    const pop = setTimeout(() => setShowCallPopup(true), 8000)
+    // AUTO SCROLL AFTER WELCOME
     setTimeout(() => {
-      window.scrollBy({ top: 140, behavior: "smooth" })
-      setTimeout(() => window.scrollBy({ top: -50, behavior: "smooth" }), 900)
-    }, 2600)
-    return () => { clearInterval(i1); clearTimeout(pop) }
+      window.scrollBy({ top: 170, behavior: "smooth" })
+      setTimeout(() => window.scrollBy({ top: -60, behavior: "smooth" }), 900)
+    }, 3400)
+    return () => {
+      clearInterval(i1)
+      clearTimeout(pop)
+    }
   }, [])
 
   const services: any = {
@@ -89,13 +137,29 @@ export default function Page({ params }: { params: { slug: string } }) {
 
   return (
     <>
-      <style>{`body{margin:0;background:#f7f7f7;font-family:system-ui}*{box-sizing:border-box}@keyframes softPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}`}</style>
+      <style>{`body{margin:0;background:#f7f7f7;font-family:system-ui}*{box-sizing:border-box}@keyframes softPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}@keyframes blink{0%,50%{opacity:1}51%,100%{opacity:0}}`}</style>
+
+      {showWelcome && (
+        <div style={{ position: "fixed", inset: 0, zIndex: 999999, background: "#fff", display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <div style={{ textAlign: "center", padding: 20 }}>
+            <div style={{ fontSize: 14, fontWeight: 600, color: "#666", letterSpacing: 3, textTransform: "uppercase", minHeight: 20 }}>{typedText1}<span style={{ borderRight: typedBrand === "" && typedText2 === ""? "2px solid #111" : "none", animation: "blink 0.8s infinite" }}>&nbsp;</span></div>
+            <div style={{ fontSize: 38, fontWeight: 900, marginTop: 8, minHeight: 50, lineHeight: 1.2 }}>
+              <span style={{ color: "#e11d48" }}>{typedBrand}</span>
+              <span style={{ color: "#111" }}>{typedText2}</span>
+              <span style={{ display: "inline-block", width: 3, height: 32, background: "#111", marginLeft: 3, verticalAlign: "middle", animation: "blink 0.8s infinite" }} />
+            </div>
+            <div style={{ marginTop: 14, width: 60, height: 4, background: "#e11d48", borderRadius: 10, margin: "14px auto 0" }} />
+            <div style={{ fontSize: 12, color: "#888", marginTop: 12, fontWeight: 600 }}>{area.name} • 45 MIN ARRIVAL</div>
+          </div>
+        </div>
+      )}
+
       <div style={{ maxWidth: 800, margin: "0 auto", background: "#fff", paddingBottom: 110, overflowX: "hidden" }}>
 
         <div style={{ padding: "12px 16px", display: "flex", justifyContent: "space-between", alignItems: "center", position: "sticky", top: 0, background: "#fff", zIndex: 20, borderBottom: "1px solid #eee" }}>
           <div>
-            <div style={{ fontWeight: 900, fontSize: 26 }}>CHIMNEY<span style={{ color: "#e11d48" }}> EXPERT</span></div>
-            <div style={{ fontSize: 11, fontWeight: 800, color: "#666" }}>NOIDA & GHAZIABAD ONLY • 45 MIN</div>
+            <div style={{ fontWeight: 900, fontSize: 26 }}><span style={{ color: "#e11d48" }}>{brand.toUpperCase()}</span> <span style={{ color: "#111" }}>CHIMNEY SERVICE</span></div>
+            <div style={{ fontSize: 11, fontWeight: 800, color: "#666" }}>NOIDA & GHAZIABAD ONLY • 45 MIN • {area.name.toUpperCase()}</div>
           </div>
           <a href={`tel:${phone}`} style={{ background: "#e11d48", color: "#fff", width: 66, height: 66, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", textDecoration: "none", fontWeight: 900, fontSize: 12, textAlign: "center", animation: "softPulse 1.6s infinite" }}>CALL<br />NOW</a>
         </div>
@@ -164,30 +228,24 @@ export default function Page({ params }: { params: { slug: string } }) {
           </div>
         </div>
 
-        {/* 1000 WORDS UNIQUE ENGLISH - ABOVE MAP - AREA DYNAMIC */}
         <div style={{ padding: "22px 16px", background: "#fff", borderTop: "8px solid #f6f6f6" }}>
-          <h2 style={{ fontSize: 20, fontWeight: 900, margin: 0 }}>Complete Chimney Care Guide for {area.name} - Service, Failure, Smoke Issue</h2>
+          <h2 style={{ fontSize: 20, fontWeight: 900, margin: 0 }}>Complete Chimney Care Guide for {area.name}</h2>
           <div style={{ marginTop: 14, borderRadius: 16, border: "1px solid #eee", background: "#fafafa", padding: 16 }}>
             <p style={{ fontSize: 13.5, lineHeight: 2, color: "#222" }}>
-              A kitchen chimney in {area.name} works much harder than in other locations because daily cooking involves heavy oil, tadka, frying, and 2 to 3 hours of burner use. Flats in {area.name} have long ducts and less cross ventilation, so oil smoke stays longer inside the blower chamber. Over 90 days, grease forms a thick layer on blower fins, motor housing, and oil collector. This is why chimneys in {area.name} lose suction faster.
+              A kitchen chimney in {area.name} works much harder than in other locations because daily cooking involves heavy oil, tadka, frying, and 2 to 3 hours of burner use. Flats in {area.name} have long ducts and less cross ventilation, so oil smoke stays longer inside the blower chamber. Over 90 days, grease forms a thick layer on blower fins, motor housing, and oil collector.
 
-              How does a chimney stop working? First, the blower wheel gets oil weight, motor slows down and heats up. Second, the capacitor becomes weak, you hear only humming but fan does not start. Third, oil enters the PCB, relay sticks, touch controls stop responding. Fourth, auto-clean heater fails so oil does not melt. Fifth, duct gets blocked by bird nests, oil lumps, or too many bends. Sixth, oil collector overflows and oil drips into the motor. In {area.name} PIN {area.pin}, high-rise buildings have 12 to 15 feet duct with 2 bends, so pressure drop reaches 50 percent if not cleaned.
+              How does a chimney stop working? First, the blower wheel gets oil weight, motor slows down. Second, capacitor weak, only humming. Third, oil enters PCB, touch stops. Fourth, auto-clean heater fails. Fifth, duct blocked. Sixth, oil collector overflows.
 
-              When should you service? In {area.name}, every 90 to 120 days for a family of 4 with daily cooking. Signs to watch: suction is low even on high speed, hand test shows no pull, oil drops from body, noise is louder than before, smoke rotates in kitchen instead of going up, baffle filters turned black, auto-clean button does not heat.
+              When to service? In {area.name}, every 90 to 120 days. Signs: low suction, oil drops, loud noise, smoke rotating, black filters, auto-clean not heating.
 
-              Why does smoke stay down? Because blower fins are blocked with oil, they cannot throw air out. Filters are 80 percent blocked. Duct has leakage and air returns back. In {area.name}, dust mixes with oil and creates a sticky layer that normal water cannot remove. We use bio degreaser that does not damage paint.
+              Why smoke stays down? Blower fins blocked, filters 80% blocked, duct leakage. In {area.name}, dust + oil makes sticky layer.
 
-              What happens in a full service? Our technician reaches {area.name} in 45 minutes. Step 1 - power off, remove filters, open blower, take photos. Step 2 - soak blower wheel in degreaser for 20 minutes, then steam wash each fin. Step 3 - clean motor housing, oil collector tray, and inside body. Step 4 - check capacitor with meter, if uF is low suggest replacement. Step 5 - clean PCB, remove carbon, tighten connectors. Step 6 - test auto-clean heater and thermal cut. Step 7 - reassemble, test suction with meter, high speed should be 6 to 8 meters per second. Step 8 - clean wall oil stains and give demo.
+              What happens in full service? Technician reaches {area.name} in 45 mins. Blower soak 20 mins, steam wash, motor housing clean, capacitor check, PCB clean, auto-clean test, suction meter test 6-8 m/s.
 
-              From base to top models all covered: Baffle filter basic model needs filter wash every 15 days in hot water with baking soda. Filterless model needs weekly auto-clean, but deep clean every 3 months is still required because blower still collects oil. T-shape, curved glass, wall mount 60cm and 90cm, island chimney, motion sensor, gesture control, WiFi app control - all have same blower concept, only PCB and sensors differ. Top models with gesture control have very sensitive PCB that fails quickly with oil, so needs extra care. Auto-clean, heat clean, steam clean are all similar, oil melts and goes to collector.
+              Base to top models: Baffle filter needs wash every 15 days. Filterless needs weekly auto-clean but deep clean every 3 months. T-shape, curved, 60cm, 90cm, island, motion sensor, gesture control - all same blower concept, PCB differs.
 
-              What if you skip service? Electricity bill increases because motor takes more load, motor burns costing 3000 to 4500, kitchen tiles turn yellow, oil smoke enters lungs causing cough for kids.
-
-              We work only in Noida and Ghaziabad including {area.name}, so we reach fast. 335+ reviews, bill provided, 30 days warranty. This content is written uniquely for {area.name} and does not match any other chimney website. Book when you notice low suction, oil dripping, high noise, auto-clean not heating, or 4 months over.
-
-              We cover Jaypee Greens, Sector 150, Wishtown 128, Indirapuram, Vaishali, Raj Nagar with same day expert visit. Fill the form above, expert calls in 5 minutes. Keep kitchen smoke free and family healthy in {area.name}.
+              Skip service leads to high bill, motor burn 3000-4500, yellow tiles, cough. We work only in Noida Ghaziabad including {area.name}, 335+ reviews, 30 days warranty. Unique content for {area.name}.
             </p>
-
             <h3 style={{ fontSize: 13, fontWeight: 900, margin: "18px 0 10px", color: "#111", textTransform: "uppercase" }}>Top Searches in {area.name}</h3>
             <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
               {seoKeys.map((k, i) => <span key={i} style={{ background: "#fff", border: "1px solid #e5e7eb", padding: "7px 12px", borderRadius: 20, fontSize: 11.5, color: "#444", fontWeight: 600 }}>{k}</span>)}
@@ -202,7 +260,7 @@ export default function Page({ params }: { params: { slug: string } }) {
           </div>
         </div>
 
-        <div style={{ margin: "12px 16px 20px", background: "#fffbe6", border: "1px solid #fde68a", padding: 14, borderRadius: 12, fontSize: 11.5, color: "#92400e", lineHeight: 1.6 }}><b>Disclaimer:</b> Independent provider in {area.name}. NOT authorized service center. Brand name used only for identification.</div>
+        <div style={{ margin: "12px 16px 20px", background: "#fffbe6", border: "1px solid #fde68a", padding: 14, borderRadius: 12, fontSize: 11.5, color: "#92400e", lineHeight: 1.6 }}><b>Disclaimer:</b> Independent provider in {area.name}. NOT authorized service center.</div>
 
         {showCallPopup && (
           <div style={{ position: "fixed", inset: 0, zIndex: 99999, background: "rgba(0,0,0,0.65)", display: "flex", alignItems: "center", justifyContent: "center", padding: 16 }}>
