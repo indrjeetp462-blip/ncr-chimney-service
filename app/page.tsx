@@ -10,7 +10,12 @@ function TypeWriter({ texts }: { texts: string[] }) {
 export default function Home(){
  const [tab, setTab] = useState("Service"); const [showForm, setShowForm] = useState(false); const [selectedService, setSelectedService] = useState(""); const [showCallPopup, setShowCallPopup] = useState(false); const [area, setArea] = useState("Noida & Ghaziabad"); const [BrandCap, setBrandCap] = useState("Chimney"); const phone = "8796284796";
  const [fbName,setFbName]=useState(""); const [fbMsg,setFbMsg]=useState(""); const [fbRating,setFbRating]=useState(5);
- useEffect(()=>{ const p = new URLSearchParams(window.location.search); let b = p.get("brand") || ""; let a = p.get("area") || ""; if(b){ const cap=b.charAt(0).toUpperCase()+b.slice(1).toLowerCase(); setBrandCap(cap); if(a) setArea(a); } const timer = setTimeout(()=> setShowCallPopup(true), 5000); return ()=> clearTimeout(timer); },[])
+ useEffect(()=>{
+   // FIX 1: Homepage ka title fix kiya
+   document.title = "Chimney Service in Noida & Ghaziabad - 30 Min Visit | All Brands";
+   const p = new URLSearchParams(window.location.search); let b = p.get("brand") || ""; let a = p.get("area") || ""; if(b){ const cap=b.charAt(0).toUpperCase()+b.slice(1).toLowerCase(); setBrandCap(cap); if(a) setArea(a); }
+   const timer = setTimeout(()=> setShowCallPopup(true), 5000); return ()=> clearTimeout(timer);
+ },[])
  const data:any = {
   Service: [
    {name:`Deep ${BrandCap} Service`, img:"https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=400", rating:"4.6 (59 reviews)", time:"1 hr 15 mins", points:["Full internal clean — blower, filters & grease trap deep-cleaned.","Suction tested before we leave.","Oil & grease 100% removed."]},
@@ -26,8 +31,8 @@ export default function Home(){
    {name:`${BrandCap} Uninstallation`, img:"https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=400", rating:"4.7 (64 reviews)", time:"60 mins", points:["Secure disconnection of "+BrandCap+" power and ducting in "+area+"."]},
   ]
  }
- // FINAL FIX - AB 1 HOMEPAGE 30 PAGES KO COMMAND KAREGA
- const link = (b:string, a:string) => `/${b.toLowerCase()}-${a.toLowerCase().replace(/\s+/g,'-').replace(/,/g,'')}`;
+ // FIX 2: Link function thik kiya taaki slug page se match kare
+ const link = (b:string, a:string) => `/${b.toLowerCase()}-${a.toLowerCase().replace(/\s+/g,'-').replace(/,/g,'').replace(/--+/g,'-')}`;
  const typewriterTexts = [`What ${BrandCap} service do you need in ${area}?`, `${BrandCap} Noise Problem Solve in ${area}?`, `${BrandCap} Not Working? 45 Min Service in ${area}`, `${BrandCap} Suction Low? Deep Cleaning in ${area}`, `${BrandCap} Motor Repair in ${area}?`];
  const popupTexts = [`${BrandCap} Noise Solve in ${area}?`, `${BrandCap} Not Working Solve?`, `${BrandCap} Suction Low Solve?`, `${BrandCap} Motor Repair in ${area}?`];
  const greenLink = {color:'#15803d', fontWeight:700, textDecoration:'none'} as any;
