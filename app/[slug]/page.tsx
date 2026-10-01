@@ -124,8 +124,8 @@ export default function Page({ params }: { params: { slug: string } }) {
 
       <div style={{ maxWidth: 800, margin: "0 auto", background: "#fff", paddingBottom: 110, overflowX: "hidden", position: "relative" }}>
 
-        {/* FIXED HEADER - SCROLL PE NA HILEGA */}
-        <div style={{ position: "fixed", top: 0, left: "50%", transform: "translateX(-50%)", width: "100%", maxWidth: 800, padding: "10px 14px", display: "flex", justifyContent: "space-between", alignItems: "center", background: "#fff", zIndex: 100, borderBottom: "1px solid #eee", boxShadow: "0 2px 10px rgba(0,0,0,0.06)" }}>
+        {/* STICKY HEADER - KATEGA NAHI, FIXED JAISA HI RAHEGA */}
+        <div style={{ position: "sticky", top: 0, width: "100%", padding: "10px 14px", display: "flex", justifyContent: "space-between", alignItems: "center", background: "#fff", zIndex: 100, borderBottom: "1px solid #eee", boxShadow: "0 2px 10px rgba(0,0,0,0.06)" }}>
           <div>
             <div style={{ fontWeight: 900, fontSize: 22, lineHeight: 1.1 }}><span style={{ color: "#e11d48" }}>{brand.toUpperCase()}</span> <span style={{ color: "#111" }}>CHIMNEY</span><br /><span style={{ color: "#111" }}>SERVICE</span></div>
             <div style={{ fontSize: 10, fontWeight: 800, color: "#666", marginTop: 3, lineHeight: 1.2 }}>NOIDA & GHAZIABAD ONLY • 45 MIN • {area.name.toUpperCase()}</div>
@@ -133,10 +133,7 @@ export default function Page({ params }: { params: { slug: string } }) {
           <a href={`tel:${phone}`} style={{ background: "#e11d48", color: "#fff", width: 62, height: 62, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", textDecoration: "none", fontWeight: 900, fontSize: 12, textAlign: "center", animation: "softPulse 1.6s infinite", flexShrink: 0 }}>CALL<br />NOW</a>
         </div>
 
-        {/* HEADER KI JAGAH KHALI SPACE TA KI CONTENT CHUPA NA */}
-        <div style={{ height: 88 }} />
-
-        {/* CHOTA KIYA HUA BLUR PHOTO - PEHLE 440 THA AB 300 */}
+        {/* BLUR PHOTO */}
         <div style={{ position: "relative", height: 300, overflow: "hidden", display: "flex", alignItems: "center", justifyContent: "center" }}>
           <img src={slides[currentSlide]} style={{ position: "absolute", width: "100%", height: "100%", objectFit: "cover", filter: "blur(14px) brightness(0.5)", transform: "scale(1.15)", transition: "0.8s" }} alt="" />
           <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom,rgba(0,0,0,0.15),rgba(0,0,0,0.7))" }} />
@@ -221,7 +218,10 @@ export default function Page({ params }: { params: { slug: string } }) {
           </div>
         </div>
 
-        <div style={{ margin: "10px 14px 18px", background: "#fffbe6", border: "1px solid #fde68a", padding: 12, borderRadius: 12, fontSize: 11, color: "#92400e", lineHeight: 1.5 }}><b>Disclaimer:</b> Independent provider in {area.name}. NOT authorized service center.</div>
+        <div style={{ margin: "10px 14px 18px", background: "#fffbe6", border: "1px solid #fde68a", padding: 14, borderRadius: 12, fontSize: 11.5, color: "#78350f", lineHeight: 1.6 }}>
+          <b style={{ color: "#92400e", fontSize: 12 }}>Disclaimer & Trademark Notice:</b><br />
+          We are an independent third-party kitchen chimney service provider operating only in Noida & Ghaziabad including {area.name} (PIN {area.pin}). We are <b>NOT</b> the authorized service center of {brand}, Faber, Glen, Hafele, Kaff, Siemens, Elica, Hindware or any other brand. All brand names, logos and trademarks shown on this page like {brand} are property of their respective owners and are used only for identification / reference purpose to describe service we provide. Customers are advised to contact official brand for company warranty or authorized service. We provide only paid repair, cleaning, installation and maintenance on chargeable basis. 30-day service warranty is from our side only.
+        </div>
 
         {showCallPopup && (
           <div style={{ position: "fixed", inset: 0, zIndex: 99999, background: "rgba(0,0,0,0.65)", display: "flex", alignItems: "center", justifyContent: "center", padding: 16 }}>
@@ -237,4 +237,10 @@ export default function Page({ params }: { params: { slug: string } }) {
         )}
 
         <div style={{ position: "fixed", bottom: 0, left: "50%", transform: "translateX(-50%)", width: "100%", maxWidth: 800, background: "#fff", borderTop: "1px solid #ddd", padding: 9, display: "flex", gap: 9, zIndex: 30 }}>
-          <a href={`tel:${phone}`} style={{ flex: 1, background: "#000", color: "#fff", textAlign: "center", padding: 13, borderRadius: 12, textDecoration: "none", fontWeight
+          <a href={`tel:${phone}`} style={{ flex: 1, background: "#000", color: "#fff", textAlign: "center", padding: 13, borderRadius: 12, textDecoration: "none", fontWeight: 900, fontSize: 14 }}>Call Expert</a>
+          <button onClick={() => formRef.current?.scrollIntoView({ behavior: "smooth" })} style={{ flex: 1, background: "#e11d48", color: "#fff", border: "none", padding: 13, borderRadius: 12, fontWeight: 900, fontSize: 14 }}>Book Now</button>
+        </div>
+      </div>
+    </>
+  )
+}
