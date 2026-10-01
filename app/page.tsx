@@ -26,7 +26,8 @@ export default function Home(){
    {name:`${BrandCap} Uninstallation`, img:"https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=400", rating:"4.7 (64 reviews)", time:"60 mins", points:["Secure disconnection of "+BrandCap+" power and ducting in "+area+"."]},
   ]
  }
- const link = (b:string, a:string) => `/?brand=${b.toLowerCase()}&area=${encodeURIComponent(a)}`;
+ // FINAL FIX - AB 1 HOMEPAGE 30 PAGES KO COMMAND KAREGA
+ const link = (b:string, a:string) => `/${b.toLowerCase()}-${a.toLowerCase().replace(/\s+/g,'-').replace(/,/g,'')}`;
  const typewriterTexts = [`What ${BrandCap} service do you need in ${area}?`, `${BrandCap} Noise Problem Solve in ${area}?`, `${BrandCap} Not Working? 45 Min Service in ${area}`, `${BrandCap} Suction Low? Deep Cleaning in ${area}`, `${BrandCap} Motor Repair in ${area}?`];
  const popupTexts = [`${BrandCap} Noise Solve in ${area}?`, `${BrandCap} Not Working Solve?`, `${BrandCap} Suction Low Solve?`, `${BrandCap} Motor Repair in ${area}?`];
  const greenLink = {color:'#15803d', fontWeight:700, textDecoration:'none'} as any;
@@ -106,7 +107,7 @@ export default function Home(){
   <div style={{padding:'32px 16px', background:'#fff'}}>
    <h2 style={{fontSize:18, fontWeight:900}}>Frequently Asked Questions - {BrandCap} {area}</h2>
    <div style={{marginTop:12}}>
-    <div style={{borderBottom:'1px solid #eee', padding:'14px 0'}}><b style={{fontSize:14}}>Q: Which areas do you provide {BrandCap} service in?</b><div style={{fontSize:12, color:'#666', marginTop:4}}>A: Only {area} - All sectors Noida 62, 18, 15, 50, 150, Indirapuram, Vaishali, Kaushambi, Crossing Republik, Raj Nagar, Vasundhara etc.</div></div>
+    <div style={{borderBottom:'1px solid #eee', padding:'14px 0'}}><b style={{fontSize:14}}>Q: Which areas do you provide {BrandCap} service in?</b><div style={{fontSize:12, color:'#666', marginTop:4}}>A: Only {area} - All sectors Noida 62, 18, 15, 50, 150, 137, 76, 78, Indirapuram, Vaishali, Kaushambi, Crossing Republik, Raj Nagar, Vasundhara etc.</div></div>
     <div style={{borderBottom:'1px solid #eee', padding:'14px 0'}}><b style={{fontSize:14}}>Q: How much time will the technician take to arrive in {area}?</b><div style={{fontSize:12, color:'#666', marginTop:4}}>A: Within 45 minutes, same day {BrandCap} service in {area}.</div></div>
     <div style={{borderBottom:'1px solid #eee', padding:'14px 0'}}><b style={{fontSize:14}}>Q: Which brands do you service?</b><div style={{fontSize:12, color:'#666', marginTop:4}}>A: All brands - Faber, Elica, Hindware, Kaff, Glen, Sunflame, Prestige, Pigeon, Inalsa, Kutchina, Blowhot, Bosch, Siemens, Hafele etc. {BrandCap} specialist in {area}.</div></div>
     <div style={{borderBottom:'1px solid #eee', padding:'14px 0'}}><b style={{fontSize:14}}>Q: Do you provide warranty?</b><div style={{fontSize:12, color:'#666', marginTop:4}}>A: Yes, we provide 30-day service warranty for {BrandCap} in {area}.</div></div>
