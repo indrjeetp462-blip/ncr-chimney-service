@@ -73,7 +73,6 @@ export default function Page({ params }: { params: { slug: string } }) {
     document.title = `${brand} Chimney Service in ${area.name}`
     const i1 = setInterval(() => setCurrentSlide(p => (p + 1) % slides.length), 3000)
     const pop = setTimeout(() => setShowCallPopup(true), 8000)
-    setTimeout(() => { window.scrollBy({ top: 120, behavior: "smooth" }) }, 3300)
     return () => { clearInterval(i1); clearTimeout(pop) }
   }, [])
 
@@ -135,7 +134,7 @@ export default function Page({ params }: { params: { slug: string } }) {
         </div>
 
         {/* HEADER KI JAGAH KHALI SPACE TA KI CONTENT CHUPA NA */}
-        <div style={{ height: 78 }} />
+        <div style={{ height: 88 }} />
 
         {/* CHOTA KIYA HUA BLUR PHOTO - PEHLE 440 THA AB 300 */}
         <div style={{ position: "relative", height: 300, overflow: "hidden", display: "flex", alignItems: "center", justifyContent: "center" }}>
@@ -238,10 +237,4 @@ export default function Page({ params }: { params: { slug: string } }) {
         )}
 
         <div style={{ position: "fixed", bottom: 0, left: "50%", transform: "translateX(-50%)", width: "100%", maxWidth: 800, background: "#fff", borderTop: "1px solid #ddd", padding: 9, display: "flex", gap: 9, zIndex: 30 }}>
-          <a href={`tel:${phone}`} style={{ flex: 1, background: "#000", color: "#fff", textAlign: "center", padding: 13, borderRadius: 12, textDecoration: "none", fontWeight: 900, fontSize: 14 }}>Call Expert</a>
-          <button onClick={() => formRef.current?.scrollIntoView({ behavior: "smooth" })} style={{ flex: 1, background: "#e11d48", color: "#fff", border: "none", padding: 13, borderRadius: 12, fontWeight: 900, fontSize: 14 }}>Book Now</button>
-        </div>
-      </div>
-    </>
-  )
-}
+          <a href={`tel:${phone}`} style={{ flex: 1, background: "#000", color: "#fff", textAlign: "center", padding: 13, borderRadius: 12, textDecoration: "none", fontWeight
