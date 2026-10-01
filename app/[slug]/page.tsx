@@ -52,43 +52,20 @@ export default function Page({ params }: { params: { slug: string } }) {
 
   const { brand, area } = getData()
 
-  // TYPEWRITER EFFECT - NOT TOO FAST NOT TOO SLOW
   useEffect(() => {
     const text1 = "Welcome to"
     const brandText = brand.toUpperCase()
     const text2 = " CHIMNEY SERVICE"
-    let i = 0
-    let j = 0
-    let k = 0
-    let phase = 1
-
+    let i = 0, j = 0, k = 0, phase = 1
     const typingInterval = setInterval(() => {
       if (phase === 1) {
-        if (i < text1.length) {
-          setTypedText1(text1.slice(0, i + 1))
-          i++
-        } else {
-          phase = 2
-        }
+        if (i < text1.length) { setTypedText1(text1.slice(0, i + 1)); i++ } else phase = 2
       } else if (phase === 2) {
-        if (j < brandText.length) {
-          setTypedBrand(brandText.slice(0, j + 1))
-          j++
-        } else {
-          phase = 3
-        }
+        if (j < brandText.length) { setTypedBrand(brandText.slice(0, j + 1)); j++ } else phase = 3
       } else if (phase === 3) {
-        if (k < text2.length) {
-          setTypedText2(text2.slice(0, k + 1))
-          k++
-        } else {
-          clearInterval(typingInterval)
-          // 1 sec ruk ke welcome hide
-          setTimeout(() => setShowWelcome(false), 1000)
-        }
+        if (k < text2.length) { setTypedText2(text2.slice(0, k + 1)); k++ } else { clearInterval(typingInterval); setTimeout(() => setShowWelcome(false), 900) }
       }
-    }, 90) // 90ms = medium speed - na fast na slow
-
+    }, 85)
     return () => clearInterval(typingInterval)
   }, [brand])
 
@@ -96,15 +73,8 @@ export default function Page({ params }: { params: { slug: string } }) {
     document.title = `${brand} Chimney Service in ${area.name}`
     const i1 = setInterval(() => setCurrentSlide(p => (p + 1) % slides.length), 3000)
     const pop = setTimeout(() => setShowCallPopup(true), 8000)
-    // AUTO SCROLL AFTER WELCOME
-    setTimeout(() => {
-      window.scrollBy({ top: 170, behavior: "smooth" })
-      setTimeout(() => window.scrollBy({ top: -60, behavior: "smooth" }), 900)
-    }, 3400)
-    return () => {
-      clearInterval(i1)
-      clearTimeout(pop)
-    }
+    setTimeout(() => { window.scrollBy({ top: 120, behavior: "smooth" }) }, 3300)
+    return () => { clearInterval(i1); clearTimeout(pop) }
   }, [])
 
   const services: any = {
@@ -142,11 +112,10 @@ export default function Page({ params }: { params: { slug: string } }) {
       {showWelcome && (
         <div style={{ position: "fixed", inset: 0, zIndex: 999999, background: "#fff", display: "flex", alignItems: "center", justifyContent: "center" }}>
           <div style={{ textAlign: "center", padding: 20 }}>
-            <div style={{ fontSize: 14, fontWeight: 600, color: "#666", letterSpacing: 3, textTransform: "uppercase", minHeight: 20 }}>{typedText1}<span style={{ borderRight: typedBrand === "" && typedText2 === ""? "2px solid #111" : "none", animation: "blink 0.8s infinite" }}>&nbsp;</span></div>
-            <div style={{ fontSize: 38, fontWeight: 900, marginTop: 8, minHeight: 50, lineHeight: 1.2 }}>
-              <span style={{ color: "#e11d48" }}>{typedBrand}</span>
-              <span style={{ color: "#111" }}>{typedText2}</span>
-              <span style={{ display: "inline-block", width: 3, height: 32, background: "#111", marginLeft: 3, verticalAlign: "middle", animation: "blink 0.8s infinite" }} />
+            <div style={{ fontSize: 14, fontWeight: 600, color: "#666", letterSpacing: 3, textTransform: "uppercase", minHeight: 20 }}>{typedText1}</div>
+            <div style={{ fontSize: 36, fontWeight: 900, marginTop: 8, minHeight: 50, lineHeight: 1.2 }}>
+              <span style={{ color: "#e11d48" }}>{typedBrand}</span><span style={{ color: "#111" }}>{typedText2}</span>
+              <span style={{ display: "inline-block", width: 3, height: 28, background: "#111", marginLeft: 3, verticalAlign: "middle", animation: "blink 0.8s infinite" }} />
             </div>
             <div style={{ marginTop: 14, width: 60, height: 4, background: "#e11d48", borderRadius: 10, margin: "14px auto 0" }} />
             <div style={{ fontSize: 12, color: "#888", marginTop: 12, fontWeight: 600 }}>{area.name} • 45 MIN ARRIVAL</div>
@@ -154,130 +123,123 @@ export default function Page({ params }: { params: { slug: string } }) {
         </div>
       )}
 
-      <div style={{ maxWidth: 800, margin: "0 auto", background: "#fff", paddingBottom: 110, overflowX: "hidden" }}>
+      <div style={{ maxWidth: 800, margin: "0 auto", background: "#fff", paddingBottom: 110, overflowX: "hidden", position: "relative" }}>
 
-        <div style={{ padding: "12px 16px", display: "flex", justifyContent: "space-between", alignItems: "center", position: "sticky", top: 0, background: "#fff", zIndex: 20, borderBottom: "1px solid #eee" }}>
+        {/* FIXED HEADER - SCROLL PE NA HILEGA */}
+        <div style={{ position: "fixed", top: 0, left: "50%", transform: "translateX(-50%)", width: "100%", maxWidth: 800, padding: "10px 14px", display: "flex", justifyContent: "space-between", alignItems: "center", background: "#fff", zIndex: 100, borderBottom: "1px solid #eee", boxShadow: "0 2px 10px rgba(0,0,0,0.06)" }}>
           <div>
-            <div style={{ fontWeight: 900, fontSize: 26 }}><span style={{ color: "#e11d48" }}>{brand.toUpperCase()}</span> <span style={{ color: "#111" }}>CHIMNEY SERVICE</span></div>
-            <div style={{ fontSize: 11, fontWeight: 800, color: "#666" }}>NOIDA & GHAZIABAD ONLY • 45 MIN • {area.name.toUpperCase()}</div>
+            <div style={{ fontWeight: 900, fontSize: 22, lineHeight: 1.1 }}><span style={{ color: "#e11d48" }}>{brand.toUpperCase()}</span> <span style={{ color: "#111" }}>CHIMNEY</span><br /><span style={{ color: "#111" }}>SERVICE</span></div>
+            <div style={{ fontSize: 10, fontWeight: 800, color: "#666", marginTop: 3, lineHeight: 1.2 }}>NOIDA & GHAZIABAD ONLY • 45 MIN • {area.name.toUpperCase()}</div>
           </div>
-          <a href={`tel:${phone}`} style={{ background: "#e11d48", color: "#fff", width: 66, height: 66, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", textDecoration: "none", fontWeight: 900, fontSize: 12, textAlign: "center", animation: "softPulse 1.6s infinite" }}>CALL<br />NOW</a>
+          <a href={`tel:${phone}`} style={{ background: "#e11d48", color: "#fff", width: 62, height: 62, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", textDecoration: "none", fontWeight: 900, fontSize: 12, textAlign: "center", animation: "softPulse 1.6s infinite", flexShrink: 0 }}>CALL<br />NOW</a>
         </div>
 
-        <div style={{ position: "relative", height: 440, overflow: "hidden", display: "flex", alignItems: "center", justifyContent: "center" }}>
-          <img src={slides[currentSlide]} style={{ position: "absolute", width: "100%", height: "100%", objectFit: "cover", filter: "blur(16px) brightness(0.45)", transform: "scale(1.2)", transition: "0.8s" }} alt="" />
-          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom,rgba(0,0,0,0.2),rgba(0,0,0,0.75))" }} />
-          <div style={{ position: "relative", zIndex: 2, padding: 20, width: "100%" }}>
-            <h1 style={{ color: "#fff", fontSize: 27, fontWeight: 900, lineHeight: 1.3, margin: 0, minHeight: 150 }}><span style={{ color: "#ff3b5c" }}>{brand}</span> Chimney {fullTitles[currentSlide].replace("AREA", area.name)}</h1>
-            <div style={{ marginTop: 16 }}><span style={{ background: "#22c55e", color: "#fff", padding: "8px 14px", borderRadius: 10, fontWeight: 900, fontSize: 13 }}>★ 4.6 (335 reviews) • Same Day • PIN {area.pin}</span></div>
+        {/* HEADER KI JAGAH KHALI SPACE TA KI CONTENT CHUPA NA */}
+        <div style={{ height: 78 }} />
+
+        {/* CHOTA KIYA HUA BLUR PHOTO - PEHLE 440 THA AB 300 */}
+        <div style={{ position: "relative", height: 300, overflow: "hidden", display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <img src={slides[currentSlide]} style={{ position: "absolute", width: "100%", height: "100%", objectFit: "cover", filter: "blur(14px) brightness(0.5)", transform: "scale(1.15)", transition: "0.8s" }} alt="" />
+          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom,rgba(0,0,0,0.15),rgba(0,0,0,0.7))" }} />
+          <div style={{ position: "relative", zIndex: 2, padding: 18, width: "100%" }}>
+            <h1 style={{ color: "#fff", fontSize: 24, fontWeight: 900, lineHeight: 1.25, margin: 0 }}><span style={{ color: "#ff3b5c" }}>{brand}</span> Chimney {fullTitles[currentSlide].replace("AREA", area.name)}</h1>
+            <div style={{ marginTop: 14 }}><span style={{ background: "#22c55e", color: "#fff", padding: "7px 12px", borderRadius: 10, fontWeight: 900, fontSize: 12 }}>★ 4.6 (335 reviews) • Same Day • PIN {area.pin}</span></div>
           </div>
         </div>
 
-        <div style={{ display: "flex", justifyContent: "center", gap: 8, padding: "12px 0" }}>
-          {slides.map((_, i) => <div key={i} style={{ width: currentSlide === i? 22 : 8, height: 8, borderRadius: 10, background: currentSlide === i? "#e11d48" : "#ddd" }} />)}
+        <div style={{ display: "flex", justifyContent: "center", gap: 8, padding: "10px 0" }}>
+          {slides.map((_, i) => <div key={i} style={{ width: currentSlide === i? 20 : 7, height: 7, borderRadius: 10, background: currentSlide === i? "#e11d48" : "#ddd" }} />)}
         </div>
 
-        <div style={{ display: "flex", gap: 10, padding: "0 16px 16px" }}>
-          {Object.keys(services).map(t => <button key={t} onClick={() => setTab(t)} style={{ flex: 1, padding: 11, borderRadius: 30, border: tab === t? "1px solid #111" : "1px solid #ddd", background: tab === t? "#111" : "#fff", color: tab === t? "#fff" : "#000", fontWeight: 800 }}>{t}</button>)}
+        <div style={{ display: "flex", gap: 10, padding: "0 14px 14px" }}>
+          {Object.keys(services).map(t => <button key={t} onClick={() => setTab(t)} style={{ flex: 1, padding: 10, borderRadius: 30, border: tab === t? "1px solid #111" : "1px solid #ddd", background: tab === t? "#111" : "#fff", color: tab === t? "#fff" : "#000", fontWeight: 800, fontSize: 13 }}>{t}</button>)}
         </div>
 
-        <div style={{ padding: 16, background: "#f6f6f6" }}>
+        <div style={{ padding: 14, background: "#f6f6f6" }}>
           {services[tab].map((s: any, i: number) => (
-            <div key={i} style={{ background: "#fff", borderRadius: 16, padding: 14, marginBottom: 12, border: "1px solid #eee", display: "flex", gap: 12, alignItems: "center" }}>
-              <img src={slides[i]} style={{ width: 78, height: 78, borderRadius: 12, objectFit: "cover" }} alt="" />
+            <div key={i} style={{ background: "#fff", borderRadius: 16, padding: 12, marginBottom: 10, border: "1px solid #eee", display: "flex", gap: 12, alignItems: "center" }}>
+              <img src={slides[i]} style={{ width: 72, height: 72, borderRadius: 12, objectFit: "cover" }} alt="" />
               <div style={{ flex: 1 }}>
-                <div style={{ fontWeight: 800 }}>{s.name}</div>
-                <div style={{ fontSize: 12, color: "#666", marginTop: 3 }}>{s.time} • {s.desc}</div>
-                <button onClick={() => formRef.current?.scrollIntoView({ behavior: "smooth" })} style={{ marginTop: 9, background: "#111", color: "#fff", border: "none", padding: "8px 16px", borderRadius: 8, fontWeight: 800, fontSize: 12 }}>Book Now</button>
+                <div style={{ fontWeight: 800, fontSize: 14 }}>{s.name}</div>
+                <div style={{ fontSize: 11.5, color: "#666", marginTop: 3 }}>{s.time} • {s.desc}</div>
+                <button onClick={() => formRef.current?.scrollIntoView({ behavior: "smooth" })} style={{ marginTop: 8, background: "#111", color: "#fff", border: "none", padding: "7px 14px", borderRadius: 8, fontWeight: 800, fontSize: 11 }}>Book Now</button>
               </div>
             </div>
           ))}
         </div>
 
-        <div style={{ padding: "18px 16px", background: "#fff", borderTop: "8px solid #f6f6f6" }}>
-          <h2 style={{ fontSize: 18, fontWeight: 900, margin: 0 }}>Chimney Noise & Problem Solved</h2>
-          <p style={{ fontSize: 12, color: "#666", margin: "6px 0 0" }}>Price after inspection - No advance</p>
-          <div style={{ marginTop: 12, display: "flex", flexDirection: "column", gap: 12 }}>
+        <div style={{ padding: "16px 14px", background: "#fff", borderTop: "8px solid #f6f6f6" }}>
+          <h2 style={{ fontSize: 17, fontWeight: 900, margin: 0 }}>Chimney Noise & Problem Solved</h2>
+          <p style={{ fontSize: 11.5, color: "#666", margin: "5px 0 0" }}>Price after inspection - No advance</p>
+          <div style={{ marginTop: 12, display: "flex", flexDirection: "column", gap: 10 }}>
             {noiseSolved.map((n: any, i: number) => (
-              <div key={i} style={{ background: "#f9fafb", border: "1px solid #e5e7eb", borderRadius: 16, padding: 14, display: "flex", gap: 12, alignItems: "center" }}>
-                <div style={{ width: 54, height: 54, borderRadius: 12, background: "#fee2e2", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 24 }}>{n.icon}</div>
+              <div key={i} style={{ background: "#f9fafb", border: "1px solid #e5e7eb", borderRadius: 16, padding: 12, display: "flex", gap: 12, alignItems: "center" }}>
+                <div style={{ width: 50, height: 50, borderRadius: 12, background: "#fee2e2", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 22 }}>{n.icon}</div>
                 <div style={{ flex: 1 }}>
-                  <div style={{ fontWeight: 800, fontSize: 14 }}>{n.name}</div>
-                  <div style={{ fontSize: 12, color: "#666", marginTop: 3 }}>{n.time} • {n.desc}</div>
-                  <button onClick={() => formRef.current?.scrollIntoView({ behavior: "smooth" })} style={{ marginTop: 8, background: "#e11d48", color: "#fff", border: "none", padding: "8px 14px", borderRadius: 8, fontWeight: 800, fontSize: 12 }}>Fix Now</button>
+                  <div style={{ fontWeight: 800, fontSize: 13.5 }}>{n.name}</div>
+                  <div style={{ fontSize: 11.5, color: "#666", marginTop: 2 }}>{n.time} • {n.desc}</div>
+                  <button onClick={() => formRef.current?.scrollIntoView({ behavior: "smooth" })} style={{ marginTop: 7, background: "#e11d48", color: "#fff", border: "none", padding: "7px 12px", borderRadius: 8, fontWeight: 800, fontSize: 11 }}>Fix Now</button>
                 </div>
               </div>
             ))}
           </div>
         </div>
 
-        <div ref={formRef} style={{ padding: "22px 16px", background: "#fff", borderTop: "8px solid #f6f6f6" }}>
-          <h2 style={{ fontSize: 18, fontWeight: 900, margin: 0 }}>Book {brand} Service - {area.name}</h2>
-          <p style={{ fontSize: 12, color: "#666", margin: "6px 0 0" }}>Expert will call in 5 minutes</p>
-          <div style={{ marginTop: 14, background: "#f9fafb", border: "1px solid #e5e7eb", borderRadius: 16, padding: 14, display: "flex", flexDirection: "column", gap: 10 }}>
-            <input value={name} onChange={e => setName(e.target.value)} placeholder="Your Name *" style={{ padding: 13, borderRadius: 10, border: "1px solid #ddd" }} />
-            <input value={mobile} onChange={e => setMobile(e.target.value)} placeholder="Mobile Number *" style={{ padding: 13, borderRadius: 10, border: "1px solid #ddd" }} />
-            <input value={address} onChange={e => setAddress(e.target.value)} placeholder="Full Address" style={{ padding: 13, borderRadius: 10, border: "1px solid #ddd" }} />
+        <div ref={formRef} style={{ padding: "20px 14px", background: "#fff", borderTop: "8px solid #f6f6f6" }}>
+          <h2 style={{ fontSize: 17, fontWeight: 900, margin: 0 }}>Book {brand} Service - {area.name}</h2>
+          <p style={{ fontSize: 11.5, color: "#666", margin: "5px 0 0" }}>Expert will call in 5 minutes</p>
+          <div style={{ marginTop: 12, background: "#f9fafb", border: "1px solid #e5e7eb", borderRadius: 16, padding: 12, display: "flex", flexDirection: "column", gap: 9 }}>
+            <input value={name} onChange={e => setName(e.target.value)} placeholder="Your Name *" style={{ padding: 12, borderRadius: 10, border: "1px solid #ddd" }} />
+            <input value={mobile} onChange={e => setMobile(e.target.value)} placeholder="Mobile Number *" style={{ padding: 12, borderRadius: 10, border: "1px solid #ddd" }} />
+            <input value={address} onChange={e => setAddress(e.target.value)} placeholder="Full Address" style={{ padding: 12, borderRadius: 10, border: "1px solid #ddd" }} />
             <div style={{ display: "flex", gap: 8 }}>
-              <input value={pincode} onChange={e => setPincode(e.target.value)} placeholder="Pincode" style={{ flex: 1, padding: 13, borderRadius: 10, border: "1px solid #ddd" }} />
-              <select value={need} onChange={e => setNeed(e.target.value)} style={{ flex: 1.3, padding: 13, borderRadius: 10, border: "1px solid #ddd", fontWeight: 700 }}>
+              <input value={pincode} onChange={e => setPincode(e.target.value)} placeholder="Pincode" style={{ flex: 1, padding: 12, borderRadius: 10, border: "1px solid #ddd" }} />
+              <select value={need} onChange={e => setNeed(e.target.value)} style={{ flex: 1.3, padding: 12, borderRadius: 10, border: "1px solid #ddd", fontWeight: 700 }}>
                 <option>Deep Cleaning</option><option>Basic Service</option><option>Noise Repair</option><option>Motor Repair</option>
               </select>
             </div>
-            <a href={waLink} target="_blank" style={{ background: "#e11d48", color: "#fff", padding: 15, borderRadius: 12, textAlign: "center", textDecoration: "none", fontWeight: 900 }}>Submit & WhatsApp →</a>
+            <a href={waLink} target="_blank" style={{ background: "#e11d48", color: "#fff", padding: 13, borderRadius: 12, textAlign: "center", textDecoration: "none", fontWeight: 900 }}>Submit & WhatsApp →</a>
           </div>
         </div>
 
-        <div style={{ padding: "22px 16px", background: "#fff", borderTop: "8px solid #f6f6f6" }}>
-          <h2 style={{ fontSize: 20, fontWeight: 900, margin: 0 }}>Complete Chimney Care Guide for {area.name}</h2>
-          <div style={{ marginTop: 14, borderRadius: 16, border: "1px solid #eee", background: "#fafafa", padding: 16 }}>
-            <p style={{ fontSize: 13.5, lineHeight: 2, color: "#222" }}>
-              A kitchen chimney in {area.name} works much harder than in other locations because daily cooking involves heavy oil, tadka, frying, and 2 to 3 hours of burner use. Flats in {area.name} have long ducts and less cross ventilation, so oil smoke stays longer inside the blower chamber. Over 90 days, grease forms a thick layer on blower fins, motor housing, and oil collector.
-
-              How does a chimney stop working? First, the blower wheel gets oil weight, motor slows down. Second, capacitor weak, only humming. Third, oil enters PCB, touch stops. Fourth, auto-clean heater fails. Fifth, duct blocked. Sixth, oil collector overflows.
-
-              When to service? In {area.name}, every 90 to 120 days. Signs: low suction, oil drops, loud noise, smoke rotating, black filters, auto-clean not heating.
-
-              Why smoke stays down? Blower fins blocked, filters 80% blocked, duct leakage. In {area.name}, dust + oil makes sticky layer.
-
-              What happens in full service? Technician reaches {area.name} in 45 mins. Blower soak 20 mins, steam wash, motor housing clean, capacitor check, PCB clean, auto-clean test, suction meter test 6-8 m/s.
-
-              Base to top models: Baffle filter needs wash every 15 days. Filterless needs weekly auto-clean but deep clean every 3 months. T-shape, curved, 60cm, 90cm, island, motion sensor, gesture control - all same blower concept, PCB differs.
-
-              Skip service leads to high bill, motor burn 3000-4500, yellow tiles, cough. We work only in Noida Ghaziabad including {area.name}, 335+ reviews, 30 days warranty. Unique content for {area.name}.
+        <div style={{ padding: "20px 14px", background: "#fff", borderTop: "8px solid #f6f6f6" }}>
+          <h2 style={{ fontSize: 18, fontWeight: 900, margin: 0 }}>Complete Chimney Care Guide for {area.name}</h2>
+          <div style={{ marginTop: 12, borderRadius: 16, border: "1px solid #eee", background: "#fafafa", padding: 14 }}>
+            <p style={{ fontSize: 13, lineHeight: 2, color: "#222" }}>
+              A kitchen chimney in {area.name} works much harder because daily cooking involves heavy oil, tadka, frying, and 2 to 3 hours burner use. Flats in {area.name} have long ducts, so oil smoke stays longer. Over 90 days, grease forms thick layer on blower fins, motor housing, and oil collector. How does chimney stop? Blower weight, weak capacitor, oil in PCB, auto-clean fail, duct blocked, collector overflow. In {area.name} PIN {area.pin}, high-rise has 12-15 feet duct with 2 bends, pressure drop 50% if not cleaned. Service every 90-120 days. Signs: low suction, oil drops, loud noise, smoke rotating, black filters. Smoke stays down because fins blocked, filters 80% blocked, duct leak. Dust + oil makes sticky layer. Full service: power off, blower soak 20 min, steam wash, motor housing clean, capacitor check, PCB clean, auto-clean test, suction 6-8 m/s. Base to top: baffle wash 15 days, filterless weekly auto-clean but deep clean 3 months, T-shape, curved, 60cm, 90cm, island, motion sensor, gesture control same blower concept. Skip leads to high bill, motor burn, yellow tiles, cough. We work only Noida Ghaziabad including {area.name}, 335+ reviews, 30 days warranty. Unique content for {area.name}.
             </p>
-            <h3 style={{ fontSize: 13, fontWeight: 900, margin: "18px 0 10px", color: "#111", textTransform: "uppercase" }}>Top Searches in {area.name}</h3>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
-              {seoKeys.map((k, i) => <span key={i} style={{ background: "#fff", border: "1px solid #e5e7eb", padding: "7px 12px", borderRadius: 20, fontSize: 11.5, color: "#444", fontWeight: 600 }}>{k}</span>)}
+            <h3 style={{ fontSize: 12, fontWeight: 900, margin: "16px 0 8px", color: "#111", textTransform: "uppercase" }}>Top Searches in {area.name}</h3>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 7 }}>
+              {seoKeys.map((k, i) => <span key={i} style={{ background: "#fff", border: "1px solid #e5e7eb", padding: "6px 10px", borderRadius: 20, fontSize: 11, color: "#444", fontWeight: 600 }}>{k}</span>)}
             </div>
           </div>
         </div>
 
-        <div style={{ padding: 16, background: "#fff" }}>
-          <h3 style={{ fontSize: 16, fontWeight: 900, margin: "0 0 10px" }}>We Serve in {area.name} - Live Map - PIN {area.pin}</h3>
+        <div style={{ padding: 14, background: "#fff" }}>
+          <h3 style={{ fontSize: 15, fontWeight: 900, margin: "0 0 10px" }}>We Serve in {area.name} - Live Map - PIN {area.pin}</h3>
           <div style={{ borderRadius: 16, overflow: "hidden", border: "1px solid #eee" }}>
-            <iframe width="100%" height="260" style={{ border: 0 }} loading="lazy" src={`https://maps.google.com/maps?q=${encodeURIComponent(area.map)}&z=14&output=embed`} />
+            <iframe width="100%" height="250" style={{ border: 0 }} loading="lazy" src={`https://maps.google.com/maps?q=${encodeURIComponent(area.map)}&z=14&output=embed`} />
           </div>
         </div>
 
-        <div style={{ margin: "12px 16px 20px", background: "#fffbe6", border: "1px solid #fde68a", padding: 14, borderRadius: 12, fontSize: 11.5, color: "#92400e", lineHeight: 1.6 }}><b>Disclaimer:</b> Independent provider in {area.name}. NOT authorized service center.</div>
+        <div style={{ margin: "10px 14px 18px", background: "#fffbe6", border: "1px solid #fde68a", padding: 12, borderRadius: 12, fontSize: 11, color: "#92400e", lineHeight: 1.5 }}><b>Disclaimer:</b> Independent provider in {area.name}. NOT authorized service center.</div>
 
         {showCallPopup && (
           <div style={{ position: "fixed", inset: 0, zIndex: 99999, background: "rgba(0,0,0,0.65)", display: "flex", alignItems: "center", justifyContent: "center", padding: 16 }}>
-            <div style={{ background: "#fff", width: "100%", maxWidth: 360, borderRadius: 20, padding: 22, textAlign: "center", position: "relative" }}>
+            <div style={{ background: "#fff", width: "100%", maxWidth: 360, borderRadius: 20, padding: 20, textAlign: "center", position: "relative" }}>
               <button onClick={() => setShowCallPopup(false)} style={{ position: "absolute", top: 10, right: 12, border: "none", background: "#f3f4f6", width: 28, height: 28, borderRadius: 20, fontWeight: 800 }}>X</button>
-              <div style={{ fontSize: 42 }}>📞</div>
-              <h3 style={{ margin: "10px 0 4px", fontWeight: 900, fontSize: 20 }}>Expert in {area.name}</h3>
-              <div style={{ fontSize: 13, color: "#666", marginTop: 6 }}>{fullTitles[currentSlide].replace("AREA", area.name)}</div>
-              <a href={`tel:${phone}`} style={{ display: "block", background: "#000", color: "#fff", padding: 14, borderRadius: 30, textDecoration: "none", fontWeight: 900, marginTop: 16 }}>Call Now Expert</a>
-              <button onClick={() => { setShowCallPopup(false); formRef.current?.scrollIntoView({ behavior: "smooth" }) }} style={{ display: "block", width: "100%", background: "#fff", border: "1px solid #ddd", padding: 12, borderRadius: 30, fontWeight: 800, marginTop: 10 }}>Book Online</button>
+              <div style={{ fontSize: 40 }}>📞</div>
+              <h3 style={{ margin: "10px 0 4px", fontWeight: 900, fontSize: 19 }}>Expert in {area.name}</h3>
+              <div style={{ fontSize: 12.5, color: "#666", marginTop: 5 }}>{fullTitles[currentSlide].replace("AREA", area.name)}</div>
+              <a href={`tel:${phone}`} style={{ display: "block", background: "#000", color: "#fff", padding: 13, borderRadius: 30, textDecoration: "none", fontWeight: 900, marginTop: 14 }}>Call Now Expert</a>
+              <button onClick={() => { setShowCallPopup(false); formRef.current?.scrollIntoView({ behavior: "smooth" }) }} style={{ display: "block", width: "100%", background: "#fff", border: "1px solid #ddd", padding: 11, borderRadius: 30, fontWeight: 800, marginTop: 9 }}>Book Online</button>
             </div>
           </div>
         )}
 
-        <div style={{ position: "fixed", bottom: 0, left: 0, right: 0, background: "#fff", borderTop: "1px solid #ddd", padding: 10, display: "flex", gap: 10, maxWidth: 800, margin: "0 auto", zIndex: 30 }}>
-          <a href={`tel:${phone}`} style={{ flex: 1, background: "#000", color: "#fff", textAlign: "center", padding: 14, borderRadius: 12, textDecoration: "none", fontWeight: 900 }}>Call Expert</a>
-          <button onClick={() => formRef.current?.scrollIntoView({ behavior: "smooth" })} style={{ flex: 1, background: "#e11d48", color: "#fff", border: "none", padding: 14, borderRadius: 12, fontWeight: 900 }}>Book Now</button>
+        <div style={{ position: "fixed", bottom: 0, left: "50%", transform: "translateX(-50%)", width: "100%", maxWidth: 800, background: "#fff", borderTop: "1px solid #ddd", padding: 9, display: "flex", gap: 9, zIndex: 30 }}>
+          <a href={`tel:${phone}`} style={{ flex: 1, background: "#000", color: "#fff", textAlign: "center", padding: 13, borderRadius: 12, textDecoration: "none", fontWeight: 900, fontSize: 14 }}>Call Expert</a>
+          <button onClick={() => formRef.current?.scrollIntoView({ behavior: "smooth" })} style={{ flex: 1, background: "#e11d48", color: "#fff", border: "none", padding: 13, borderRadius: 12, fontWeight: 900, fontSize: 14 }}>Book Now</button>
         </div>
       </div>
     </>
